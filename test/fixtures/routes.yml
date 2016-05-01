@@ -1,0 +1,27 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  to_id: 
+  from_id: 
+  pirority: 1
+  provider: MyString
+  weight_cost: 9.99
+  volume_cost: 9.99
+  max_weight: 9.99
+  max_volume: 9.99
+  duration: 9.99
+  frequency: 1
+  day: MyString
+
+two:
+  to_id: 
+  from_id: 
+  pirority: 1
+  provider: MyString
+  weight_cost: 9.99
+  volume_cost: 9.99
+  max_weight: 9.99
+  max_volume: 9.99
+  duration: 9.99
+  frequency: 1
+  day: MyString

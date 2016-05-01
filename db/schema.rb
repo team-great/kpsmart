@@ -11,9 +11,33 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 0) do
+ActiveRecord::Schema.define(version: 20160501223758) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "cities", force: :cascade do |t|
+    t.string   "name"
+    t.decimal  "latitude",   precision: 15, scale: 10, default: 0.0
+    t.decimal  "longitude",  precision: 15, scale: 10, default: 0.0
+    t.datetime "created_at",                                         null: false
+    t.datetime "updated_at",                                         null: false
+  end
+
+  create_table "routes", force: :cascade do |t|
+    t.integer  "to_id"
+    t.integer  "from_id"
+    t.integer  "pirority"
+    t.string   "provider"
+    t.decimal  "weight_cost"
+    t.decimal  "volume_cost"
+    t.decimal  "max_weight"
+    t.decimal  "max_volume"
+    t.decimal  "duration"
+    t.integer  "frequency"
+    t.string   "day"
+    t.datetime "created_at",  null: false
+    t.datetime "updated_at",  null: false
+  end
 
 end
