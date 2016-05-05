@@ -3,7 +3,7 @@
 one:
   to_id: 
   from_id: 
-  pirority: 1
+  priority: 1
   provider: MyString
   weight_cost: 9.99
   volume_cost: 9.99
@@ -16,7 +16,7 @@ one:
 two:
   to_id: 
   from_id: 
-  pirority: 1
+  priority: 1
   provider: MyString
   weight_cost: 9.99
   volume_cost: 9.99

@@ -7,13 +7,12 @@
 #   Mayor.create(name: 'Emanuel', city: cities.first)
 
 
-=begin
 
 initial_transport_routes = [
-	
 	# Create some transport routes
 	# NZ depots - Auckland, Hamilton, Rotorua, Palmerston North, Wellington, Christchurch, Dunedin
 
+	#       0,     1,   2,   3,           4,          5,         6,      7,        8,    9
 	# company, start, end, type, weightcost, volumecost, maxWeight, maxVol, duration, freq
 	
 	# connecting all nz cities, which counts as free.
@@ -64,6 +63,24 @@ initial_transport_routes = [
 	[ "Virgin International", "Istanbul", "Prague", "Air", 15, 16, 2000, 50, 5, 14]
 ]
 
+initial_transport_routes.each do |route|
+  # can move this out if we bother to set lat & long
+  to = City.where(name: route[1]).first_or_create
+  from = City.where(name: route[2]).first_or_create
+
+  Route.create(provider: route[0],
+               to: to,
+               from: from,
+               priority: route[3],  
+               weight_cost: route[4],
+               volume_cost: route[5],
+               max_weight: route[6],
+               max_volume: route[7],
+               duration: route[8],
+               frequency: route[9])
+end
+
+=begin
 transport_cost_update = [
 	#same fields as route creation
 	# the xml on the assignment also has a "day" field, but that's silly.
@@ -109,5 +126,4 @@ customer_price_update [
 discontinue [
 	[ "Air New Zealand", "Sydney", "Wellington", "Air" ]
 ]
-
 =end
