@@ -4,5 +4,12 @@ class City < ActiveRecord::Base
 
   def routes
     self.to + self.from
-  end 
+  end
+
+  def self.get_id_from_name(name)
+
+    City.find_by(name: name).id rescue -1
+
+  end
+
 end

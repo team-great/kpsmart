@@ -1,0 +1,47 @@
+<%= form_for(@route) do |f| %>
+  <% if @route.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@route.errors.count, "error") %> prohibited this route from being saved:</h2>
+
+      <ul>
+      <% @route.errors.each do |test, message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div>
+    <% !current_page?(action: 'edit') do %>
+
+    <%= label_tag 'to_name'%><br>
+    <%= text_field_tag 'to_name' %><br>
+    <%= label_tag 'from_name'%><br>
+    <%= text_field_tag :from_name %><br>
+
+    <% end %>
+
+    <%= label_tag 'pirority'%><br>
+    <%= f.number_field :pirority %><br>
+    <%= label_tag 'provider'%><br>
+    <%= f.text_field :provider %><br>
+    <%= label_tag 'weight_cost'%><br>
+    <%= f.number_field :weight_cost, step: :any %><br>
+    <%= label_tag 'volume_cost'%><br>
+    <%= f.number_field :volume_cost, step: :any %><br>
+    <%= label_tag 'max_weight'%><br>
+    <%= f.number_field :max_weight, step: :any %><br>
+    <%= label_tag 'max_volume'%><br>
+    <%= f.number_field :max_volume, step: :any %><br>
+    <%= label_tag 'duration'%><br>
+    <%= f.number_field :duration, step: :any %><br>
+    <%= label_tag 'frequency'%><br>
+    <%= f.number_field :frequency %><br>
+    <%= label_tag 'day'%><br>
+    <%= f.text_field :day %><br>
+  </div>
+
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>
