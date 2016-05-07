@@ -12,7 +12,7 @@
   <% end %>
 
   <div>
-    <% !current_page?(action: 'edit') do %>
+    <% if action_name != 'edit' %>
 
     <%= label_tag 'to_name'%><br>
     <%= text_field_tag 'to_name' %><br>

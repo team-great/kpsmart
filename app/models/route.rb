@@ -14,12 +14,12 @@ class Route < ActiveRecord::Base
   validates :to_id, :numericality => {allow_blank: false,
                                       greater_than_or_equal_to: 0,
                                       message: 'Unable to find starting city node for given city name.'
-  }
+  }, on: :create
 
   validates :from_id, :numericality => {allow_blank: false,
                                         greater_than_or_equal_to: 0,
                                         message: 'Unable to find destination city node for given city name.'
-  }
+  }, on: :create
 
   validates :pirority,
             :weight_cost,
