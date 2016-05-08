@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160501223758) do
+ActiveRecord::Schema.define(version: 20160505092051) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -27,7 +27,7 @@ ActiveRecord::Schema.define(version: 20160501223758) do
   create_table "routes", force: :cascade do |t|
     t.integer  "to_id"
     t.integer  "from_id"
-    t.integer  "pirority"
+    t.integer  "priority"
     t.string   "provider"
     t.decimal  "weight_cost"
     t.decimal  "volume_cost"
