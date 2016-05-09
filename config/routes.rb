@@ -6,4 +6,5 @@ Rails.application.routes.draw do
   resources :reports
   resources :mail_deliveries
 
+  devise_for :users
 end

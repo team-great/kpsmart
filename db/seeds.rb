@@ -130,6 +130,11 @@ mail_delivery.each do |mail|
 
 end
 
+
+User.create!(email: "clerk@kps.com", password: "12345")
+User.create!(email: "manager@kps.com", password: "12345")
+
+
 =begin
 transport_cost_update = [
 	#same fields as route creation
