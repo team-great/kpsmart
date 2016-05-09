@@ -52,8 +52,12 @@ class Route < ActiveRecord::Base
 
   def convert_node_names_to_ids
 
-    self.to_id = City.get_id_from_name(to_id)
-    self.from_id = City.get_id_from_name(from_id)
+    puts self.inspect
+
+    puts "sending #{self.to_name} to city model"
+
+    self.to_id = City.get_id_from_name(to_name)
+    self.from_id = City.get_id_from_name(from_name)
 
   end
 

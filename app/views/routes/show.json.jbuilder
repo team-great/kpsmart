@@ -1,1 +1,1 @@
-json.extract! @route, :id, :created_at, :updated_at
+json.extract! @route, :id, :to_id, :from_id

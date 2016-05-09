@@ -8,6 +8,8 @@ class City < ActiveRecord::Base
 
   def self.get_id_from_name(name)
 
+    puts "finding #{name}"
+
     City.find_by(name: name).id rescue -1
 
   end

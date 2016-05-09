@@ -3,6 +3,8 @@ require 'test_helper'
 class RoutesControllerTest < ActionController::TestCase
   setup do
     @route = routes(:one)
+    @wellington = cities(:Wellington)
+    @auckland = cities(:Auckland)
   end
 
   test "should get index" do
@@ -17,11 +19,13 @@ class RoutesControllerTest < ActionController::TestCase
   end
 
   test "should create route" do
-    #assert_difference('Route.count') do
-    #  post :create, route: {  }
-    #end
+    #needs cities to be populated before running
+    #
+    assert_difference('Route.count') do
+      post :create, to_name: 'Auckland', from_name: 'Wellington',  route: {pirority: 1, provider: 'NZ POST', weight_cost: 5, volume_cost: 10, max_weight: 10, max_volume: 20, duration: 1, frequency: 1, day: 'Monday'}
+    end
 
-    #assert_redirected_to route_path(assigns(:route))
+    assert_redirected_to route_path(assigns(:route))
   end
 
   test "should show route" do
