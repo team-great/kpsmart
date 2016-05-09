@@ -19,3 +19,7 @@ script:
 
 notifications:
   slack: swen301acccd:hiVWVYq1BzFlmHYMf81QCQek
+
+addons:
+  code_climate:
+    repo_token: 56013039553b9a61f71634fc0a5bf131893a07dd223b9b2736575c0fe7671295
