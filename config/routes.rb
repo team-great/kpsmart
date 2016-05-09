@@ -4,4 +4,5 @@ Rails.application.routes.draw do
   resources :routes
   resources :cities
 
+  devise_for :users
 end
