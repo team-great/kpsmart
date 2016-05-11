@@ -9,6 +9,7 @@ class Route < ActiveRecord::Base
   end
 
   attr_accessor :to_name, :from_name
+  has_paper_trail
 
 
   validates :to_id, :numericality => {allow_blank: false,
@@ -53,8 +54,6 @@ class Route < ActiveRecord::Base
   def convert_node_names_to_ids
 
     puts self.inspect
-
-    puts "sending #{self.to_name} to city model"
 
     self.to_id = City.get_id_from_name(to_name)
     self.from_id = City.get_id_from_name(from_name)
