@@ -1,14 +1,17 @@
 class Route < ActiveRecord::Base
   belongs_to :to, class_name: 'City'
   belongs_to :from, class_name: 'City'
+  has_and_belongs_to_many :mail_deliveries
+
 
   before_validation(on: [:create, :update]) do
 
     convert_node_names_to_ids
+    convert_prority_to_int
 
   end
 
-  attr_accessor :to_name, :from_name
+  attr_accessor :to_name, :from_name, :priority_name
   has_paper_trail
 
 
@@ -53,10 +56,19 @@ class Route < ActiveRecord::Base
 
   def convert_node_names_to_ids
 
-    puts self.inspect
-
     self.to_id = City.get_id_from_name(to_name)
     self.from_id = City.get_id_from_name(from_name)
+
+  end
+
+  def convert_prority_to_int
+
+    types = {
+        'Air' => 0,
+        'Sea' => 1
+    }
+
+    self.priority = types[priority_name]
 
   end
 

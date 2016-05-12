@@ -63,21 +63,27 @@ initial_transport_routes = [
 	[ "Virgin International", "Istanbul", "Prague", "Air", 15, 16, 2000, 50, 5, 14]
 ]
 
+
 initial_transport_routes.each do |route|
   # can move this out if we bother to set lat & long
-  to = City.where(name: route[1]).first_or_create
-  from = City.where(name: route[2]).first_or_create
+  to = City.where(name: route[1]).first_or_create.name
+  from = City.where(name: route[2]).first_or_create.name
 
-  Route.create(provider: route[0],
-               to: to,
-               from: from,
-               priority: route[3],  
+  r = Route.create(provider: route[0],
+               to_name: to,
+               from_name: from,
+               priority_name: route[3],
                weight_cost: route[4],
                volume_cost: route[5],
                max_weight: route[6],
                max_volume: route[7],
                duration: route[8],
-               frequency: route[9])
+               frequency: route[9],
+               day: 'Monday')
+
+  unless r.save
+    puts r.errors.inspect
+  end
 end
 
 =begin
