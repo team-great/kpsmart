@@ -25,8 +25,7 @@ class Route < ActiveRecord::Base
                                         message: 'Unable to find destination city node for given city name.'
   }, on: :create
 
-  validates :priority,
-            :weight_cost,
+  validates :weight_cost,
             :volume_cost,
             :max_weight,
             :max_volume,

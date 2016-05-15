@@ -77,6 +77,6 @@ class RoutesController < ApplicationController
 
     # Whitelist parameters
     def route_params
-      params.fetch(:route, {}).permit(:to_name, :from_name, :priority_name, :provider, :weight_cost, :volume_cost, :max_weight, :max_volume, :duration, :frequency, :day)
+      params.require(:route).permit(:to_name, :from_name, :priority_name, :provider, :weight_cost, :volume_cost, :max_weight, :max_volume, :duration, :frequency, :day)
     end
 end

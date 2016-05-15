@@ -5,7 +5,9 @@ class City < ActiveRecord::Base
   has_paper_trail
 
   def routes
+
     self.to + self.from
+
   end
 
   def self.get_id_from_name(name)
