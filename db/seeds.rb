@@ -82,7 +82,7 @@ initial_transport_routes.each do |route|
                day: 'Monday')
 
   unless r.save
-    puts r.errors.inspect
+    puts r.inspect
   end
 end
 

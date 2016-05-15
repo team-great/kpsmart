@@ -68,6 +68,8 @@ class Route < ActiveRecord::Base
         'Sea' => 1
     }
 
+    puts types[priority_name]
+
     self.priority = types[priority_name]
 
   end

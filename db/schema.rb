@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160511221419) do
+ActiveRecord::Schema.define(version: 20160511232003) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -22,6 +22,22 @@ ActiveRecord::Schema.define(version: 20160511221419) do
     t.decimal  "longitude",  precision: 15, scale: 10, default: 0.0
     t.datetime "created_at",                                         null: false
     t.datetime "updated_at",                                         null: false
+  end
+
+  create_table "mail_deliveries", force: :cascade do |t|
+    t.string   "day"
+    t.integer  "to_id"
+    t.integer  "from_id"
+    t.decimal  "weight"
+    t.decimal  "size"
+    t.string   "priority"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "mail_deliveries_routes", id: false, force: :cascade do |t|
+    t.integer "mail_delivery_id"
+    t.integer "route_id"
   end
 
   create_table "routes", force: :cascade do |t|

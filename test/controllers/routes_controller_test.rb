@@ -22,7 +22,7 @@ class RoutesControllerTest < ActionController::TestCase
     #needs cities to be populated before running
     #
     assert_difference('Route.count') do
-      post :create, to_name: 'Auckland', from_name: 'Wellington',  route: {priority: 1, provider: 'NZ POST', weight_cost: 5, volume_cost: 10, max_weight: 10, max_volume: 20, duration: 1, frequency: 1, day: 'Monday'}
+      post :create, to_name: 'Auckland', from_name: 'Wellington',  route: {priority: 'Air', provider: 'NZ POST', weight_cost: 5, volume_cost: 10, max_weight: 10, max_volume: 20, duration: 1, frequency: 1, day: 'Monday'}
     end
 
     assert_redirected_to route_path(assigns(:route))
