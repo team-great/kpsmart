@@ -14,7 +14,8 @@ initial_transport_routes = [
 
 	#       0,     1,   2,   3,           4,          5,         6,      7,        8,    9
 	# company, start, end, type, weightcost, volumecost, maxWeight, maxVol, duration, freq
-	
+
+
 	# connecting all nz cities, which counts as free.
 	[ "Air New Zealand", "Auckland", "Hamilton", "Air", 0, 0, 1000, 1000, 3, 36],
 	[ "Air New Zealand", "Rotorua", "Hamilton", "Air", 0, 0, 1000, 1000, 3, 36],
