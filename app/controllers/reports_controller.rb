@@ -4,7 +4,7 @@ class ReportsController < ApplicationController
   #Both these methods could easily be a single method which would make the data more accesible without
   #displaying too much at any time
   # Requires route finding logic
-  def path_summary
+  def index
 
     #TODO
     #for each mail_delivery, calculate all values associated with it and display it the the user
@@ -19,18 +19,23 @@ class ReportsController < ApplicationController
 
       mail.routes.each do |route|
 
+        puts route.inspect
+
         weight_cost = weight_cost + route.weight_cost
         volume_cost = volume_cost + route.volume_cost
 
       end
 
-      cost = (weight_cost * mail.weight) + (volume_cost * mail.volume)
+      cost = (weight_cost * mail.weight) + (volume_cost * mail.size)
 
       @mail["mail_item_#{mail.id}"] = mail.as_json.merge(:cost => cost)
 
       @total_cost = @total_cost + cost
 
     end
+    puts @mail
+    puts ''
+    puts @total_cost
 
   end
 

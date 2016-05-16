@@ -6,7 +6,7 @@
 #   cities = City.create([{ name: 'Chicago' }, { name: 'Copenhagen' }])
 #   Mayor.create(name: 'Emanuel', city: cities.first)
 
-
+@routes = []
 
 initial_transport_routes = [
 	# Create some transport routes
@@ -84,6 +84,7 @@ initial_transport_routes.each do |route|
   unless r.save
     puts r.errors.messages
   end
+  @routes << r
 end
 
 
@@ -120,6 +121,10 @@ mail_delivery.each do |mail|
 		puts m.errors.messages
 
   end
+
+  m.routes << @routes[10]
+  m.routes << @routes[11]
+  m.routes << @routes[12]
 
 end
 

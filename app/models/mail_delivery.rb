@@ -28,7 +28,7 @@ class MailDelivery < ActiveRecord::Base
         'Sea' => 1
 
     }
-    
+
     self.priority = types[priority_name]
 
   end
