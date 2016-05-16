@@ -1,0 +1,17 @@
+<%= form_for(@mail_delivery) do |f| %>
+  <% if @mail_delivery.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@mail_delivery.errors.count, "error") %> prohibited this mail_delivery from being saved:</h2>
+
+      <ul>
+      <% @mail_delivery.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>

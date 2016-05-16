@@ -1,16 +1,16 @@
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
 one:
-  day: MyString
+  day: 'Monday'
   to_id: 1
-  from_id: 1
+  from_id: 2
   weight: 9.99
   size: 9.99
   priority: MyString
 
 two:
-  day: MyString
-  to_id: 1
+  day: 'Tuesday'
+  to_id: 2
   from_id: 1
   weight: 9.99
   size: 9.99

@@ -4,5 +4,6 @@ Rails.application.routes.draw do
   resources :routes
   resources :cities
   resources :reports
+  resources :mail_deliveries
 
 end
