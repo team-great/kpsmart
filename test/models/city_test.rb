@@ -4,8 +4,9 @@ class CityTest < ActiveSupport::TestCase
 
   def setup
     @city = cities(:one)
-    @to = Route.create(to: @city, provider: "AU")
-    @from = Route.create(from: @city, provider: "NZ")
+    @to = routes(:one)
+    @from = routes(:two)
+
   end
 
   def teardown
@@ -14,16 +15,49 @@ class CityTest < ActiveSupport::TestCase
     @city = nil
   end
 
-  test "a city has routes to it" do
-    #assert_equal @city.to, [@to]
+  def routes_via_id
+    @to.to = @city
+    @from.from = @city
+
+    assert @to.save, @to.errors.first
+    assert @from.save, @from.errors.first
   end
 
-  test "a city has routes from it" do
-    #assert_equal @city.from, [@from]
+  def routes_via_name
+    @to.to_name = @city.name
+    @from.from_name = @city.name
+
+    assert @to.save, @to.errors.first
+    assert @from.save, @from.errors.first
   end
 
-  test "a city has routes" do
-    #assert_equal @city.routes, [@to, @from]
+  test "a city has routes to it (via id)" do
+    routes_via_id
+    assert_equal [@to], @city.to
   end
 
+  test "a city has routes from it (via id)" do
+    routes_via_id
+    assert_equal [@from], @city.from
+  end
+
+  test "a city has routes (via id)" do
+    routes_via_id
+    assert_equal [@to, @from], @city.routes
+  end
+
+  test "a city has routes to it (via name)" do
+    routes_via_name
+    assert_equal [@to], @city.to
+  end
+
+  test "a city has routes from it (via name)" do
+    routes_via_name
+    assert_equal [@from], @city.from
+  end
+
+  test "a city has routes (via name)" do
+    routes_via_name
+    assert_equal [@to, @from], @city.routes
+  end
 end

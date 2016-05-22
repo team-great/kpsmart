@@ -11,11 +11,11 @@ Auckland:
   longitude: 9.99
 
 one:
-    name: Wellington
+    name: Tests are cool
     latitude: 9.99
     longitude: 9.99
 
 two:
-    name: Auckland
+    name: Tests are super cool
     latitude: 9.99
     longitude: 9.99

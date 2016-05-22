@@ -57,20 +57,49 @@ class Route < ActiveRecord::Base
 
   def convert_node_names_to_ids
 
-    self.to_id = City.get_id_from_name(to_name)
-    self.from_id = City.get_id_from_name(from_name)
+    # stop to/from ids from getting nilled from missing *_name's
+    if to_name
+      to_id = City.get_id_from_name(to_name)
+
+      # make sure what you got back is a valid city id
+      if to_id
+        self.to_id = to_id
+      else
+        errors.add(:to_name, "#{to_name} is not a valid city")
+      end
+    end
+
+    if from_name
+      from_id = City.get_id_from_name(from_name)
+
+      # make sure what you got back is a valid city id
+      if from_id
+        self.from_id = from_id
+      else
+        errors.add(:from_name, "#{from_name} is not a valid city")
+      end
+    end
 
   end
 
   def convert_prority_to_int
 
     types = {
-        'Air' => 0,
-        'Sea' => 1
+      'Air' => 1,
+      'Sea' => 2
     }
 
-    self.priority = types[priority_name]
+    # stop priority from getting nilled by missing priority_name
+    if priority_name
+      priority_id = types[priority_name]
 
+      # ensure we are using a valid priority
+      if priority_id
+        self.priority = priority_id
+      else
+        errors.add(:priority_name, "#{priority_name} is not a valid priority")
+      end
+    end
   end
 
 
