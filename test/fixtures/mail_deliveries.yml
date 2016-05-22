@@ -6,7 +6,7 @@ one:
   from_id: 2
   weight: 9.99
   size: 9.99
-  priority: MyString
+  priority: Air
 
 two:
   day: 'Tuesday'
@@ -14,4 +14,4 @@ two:
   from_id: 1
   weight: 9.99
   size: 9.99
-  priority: MyString
+  priority: Sea
