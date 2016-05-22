@@ -60,8 +60,11 @@ class ReportsController < ApplicationController
 
       cost = (weight_cost * mail.weight) + (volume_cost * mail.volume)
 
-
     end
+
+  end
+
+  def critical_routes
 
   end
 

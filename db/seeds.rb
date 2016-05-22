@@ -75,6 +75,8 @@ initial_transport_routes.each do |route|
                priority_name: route[3],
                weight_cost: route[4],
                volume_cost: route[5],
+               weight_price: route[4],
+               volume_price: route[5],
                max_weight: route[6],
                max_volume: route[7],
                duration: route[8],

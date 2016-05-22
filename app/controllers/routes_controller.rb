@@ -72,11 +72,11 @@ class RoutesController < ApplicationController
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_route
-      @route = Route.find(params[:id])
+      @route = Route.find_by(id: params[:id])
     end
 
     # Whitelist parameters
     def route_params
-      params.require(:route).permit(:to_name, :from_name, :priority_name, :provider, :weight_cost, :volume_cost, :max_weight, :max_volume, :duration, :frequency, :day)
+      params.require(:route).permit(:to_name, :from_name, :priority_name, :provider, :weight_cost, :weight_price, :volume_cost, :volume_price, :max_weight, :max_volume, :duration, :frequency, :day)
     end
 end

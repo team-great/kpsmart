@@ -26,7 +26,9 @@ class Route < ActiveRecord::Base
   }, on: :create
 
   validates :weight_cost,
+            :weight_price,
             :volume_cost,
+            :volume_price,
             :max_weight,
             :max_volume,
             :duration,
