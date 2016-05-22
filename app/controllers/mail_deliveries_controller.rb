@@ -7,7 +7,6 @@ class MailDeliveriesController < ApplicationController
   # GET /mail_deliveries.json
   def index
     @mail_deliveries = MailDelivery.all
-    puts @mail_deliveries.inspect
   end
 
   # GET /mail_deliveries/1

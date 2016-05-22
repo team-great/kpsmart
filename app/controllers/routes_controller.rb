@@ -10,7 +10,6 @@ class RoutesController < ApplicationController
   # GET /routes/1
   # GET /routes/1.json
   def show
-    puts @route.inspect
   end
 
   # GET /routes/new
