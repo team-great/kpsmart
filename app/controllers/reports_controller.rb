@@ -19,8 +19,6 @@ class ReportsController < ApplicationController
 
       mail.routes.each do |route|
 
-        puts route.inspect
-
         weight_cost = weight_cost + route.weight_cost
         volume_cost = volume_cost + route.volume_cost
 
@@ -33,9 +31,6 @@ class ReportsController < ApplicationController
       @total_cost = @total_cost + cost
 
     end
-    puts @mail
-    puts ''
-    puts @total_cost
 
   end
 

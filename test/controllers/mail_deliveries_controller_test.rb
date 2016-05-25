@@ -3,6 +3,16 @@ require 'test_helper'
 class MailDeliveriesControllerTest < ActionController::TestCase
   setup do
     @mail_delivery = mail_deliveries(:one)
+
+    @to_city = cities(:one)
+    @from_city = cities(:two)
+  end
+
+  def teardown
+    @mail_delivery = nil
+
+    @to_city = nil
+    @from_city = nil
   end
 
   test "should get index" do
@@ -18,7 +28,7 @@ class MailDeliveriesControllerTest < ActionController::TestCase
 
   test "should create mail_delivery" do
     assert_difference('MailDelivery.count') do
-      post :create, {:to_name => 'Wellington', :from_name => 'Auckland', mail_delivery: { day: @mail_delivery.day, weight: @mail_delivery.weight, size: @mail_delivery.size, priority_name: @mail_delivery.priority }}
+      post :create, {:to_name => @to_city.name, :from_name => @from_city.name, mail_delivery: { day: @mail_delivery.day, weight: @mail_delivery.weight, size: @mail_delivery.size, priority_name: @mail_delivery.priority }}
     end
 
     assert_redirected_to mail_delivery_path(assigns(:mail_delivery))
