@@ -6,7 +6,7 @@
 #   cities = City.create([{ name: 'Chicago' }, { name: 'Copenhagen' }])
 #   Mayor.create(name: 'Emanuel', city: cities.first)
 
-
+@routes = []
 
 initial_transport_routes = [
 	# Create some transport routes
@@ -14,7 +14,6 @@ initial_transport_routes = [
 
 	#       0,     1,   2,   3,           4,          5,         6,      7,        8,    9
 	# company, start, end, type, weightcost, volumecost, maxWeight, maxVol, duration, freq
-
 
 	# connecting all nz cities, which counts as free.
 	[ "Air New Zealand", "Auckland", "Hamilton", "Air", 0, 0, 1000, 1000, 3, 36],
@@ -64,22 +63,77 @@ initial_transport_routes = [
 	[ "Virgin International", "Istanbul", "Prague", "Air", 15, 16, 2000, 50, 5, 14]
 ]
 
+
 initial_transport_routes.each do |route|
   # can move this out if we bother to set lat & long
-  to = City.where(name: route[1]).first_or_create
-  from = City.where(name: route[2]).first_or_create
+  to = City.where(name: route[1]).first_or_create.name
+  from = City.where(name: route[2]).first_or_create.name
 
-  Route.create(provider: route[0],
-               to: to,
-               from: from,
-               priority: route[3],  
+  r = Route.create(provider: route[0],
+               to_name: to,
+               from_name: from,
+               priority_name: route[3],
                weight_cost: route[4],
                volume_cost: route[5],
+               weight_price: route[4],
+               volume_price: route[5],
                max_weight: route[6],
                max_volume: route[7],
                duration: route[8],
-               frequency: route[9])
+               frequency: route[9],
+               day: 'Monday')
+
+  unless r.save
+    puts r.errors.messages
+  end
+  @routes << r
 end
+
+
+
+mail_delivery = [
+	# day, to, from, weight, volume, priority
+	[ "Monday", "Prague", "Wellington", 100, 5, "Air"],
+	[ "Tuesday", "Istabul", "Dunedin", 100, 5, "Air"],
+	[ "Wednesday", "London", "Wellington", 100, 5, "Air"],
+	[ "Friday", "Buenos Aires", "Hamilton", 100, 5, "Air"],
+	[ "Monday", "Berlin", "Dunedin", 100, 5, "Air"],
+	[ "Monday", "Bangkok", "Wellington", 100, 5, "Air"],
+	[ "Friday", "Beijing", "Hamilton", 100, 5, "Air"],
+	[ "Tuesday", "Buenos Aires", "Dunedin", 100, 5, "Air"],
+	[ "Monday", "Mexico City", "Wellington", 100, 5, "Air"],
+	[ "Wednesday", "Sydney", "Hamilton", 100, 5, "Air"],
+	[ "Tuesday", "Singapore", "Dunedin", 100, 5, "Air"]
+]
+
+mail_delivery.each do |mail|
+
+	to = City.where(name: mail[1]).first_or_create.name
+	from = City.where(name: mail[2]).first_or_create.name
+
+	m = MailDelivery.create(day: mail[0],
+									 to_name: to,
+									 from_name: from,
+									 weight: mail[3],
+									 size: mail[4],
+									 priority_name: mail[5])
+
+	unless m.save
+
+		puts m.errors.messages
+
+  end
+
+  m.routes << @routes[10]
+  m.routes << @routes[11]
+  m.routes << @routes[12]
+
+end
+
+
+User.create!(email: "clerk@kps.com", password: "12345")
+User.create!(email: "manager@kps.com", password: "12345")
+
 
 =begin
 transport_cost_update = [
@@ -99,22 +153,6 @@ transport_cost_update = [
 	[ "Air New Zealand", "Auckland", "Sydney", "Air", 8, 9, 300, 50, 5, 14],
 	[ "Air New Zealand", "Auckland", "Singapore", "Air", 11, 10, 300, 50, 6, 14],
 	[ "Air New Zealand", "Auckland", "Tokyo", "Air", 9, 11, 300, 50, 13, 14]
-]
-
-
-mail_delivery = [
-	# day, to, from, weight, volume, priority
-	[ "Monday", "Prague", "Wellington", 100, 5, "Air"],
-	[ "Tuesday", "Istabul", "Dunedin", 100, 5, "Air"],
-	[ "Wednesday", "London", "Wellington", 100, 5, "Air"],
-	[ "Friday", "Buenos Aires", "Hamilton", 100, 5, "Air"],
-	[ "Monday", "Berlin", "Dunedin", 100, 5, "Air"],
-	[ "Monday", "Bangkok", "Wellington", 100, 5, "Air"],
-	[ "Friday", "Beijing", "Hamilton", 100, 5, "Air"],
-	[ "Tuesday", "Buenos Aires", "Dunedin", 100, 5, "Air"],
-	[ "Monday", "Mexico City", "Wellington", 100, 5, "Air"],
-	[ "Wednesday", "Sydney", "Hamilton", 100, 5, "Air"],
-	[ "Tuesday", "Singapore", "Dunedin", 100, 5, "Air"]
 ]
 
 customer_price_update [

@@ -7,6 +7,8 @@ one:
   provider: MyString
   weight_cost: 9.99
   volume_cost: 9.99
+  weight_price: 9.99
+  volume_price: 9.99
   max_weight: 9.99
   max_volume: 9.99
   duration: 9.99
@@ -19,6 +21,8 @@ two:
   provider: MyString
   weight_cost: 9.99
   volume_cost: 9.99
+  weight_price: 9.99
+  volume_price: 9.99
   max_weight: 9.99
   max_volume: 9.99
   duration: 9.99

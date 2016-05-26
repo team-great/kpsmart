@@ -1,7 +1,6 @@
 source 'https://rubygems.org'
 
-#gem 'dijkstra', '~> 0.1.0'
-
+gem 'paper_trail'
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '4.2.6'
 # Use postgresql as the database for Active Record
@@ -48,3 +47,4 @@ group :development do
   gem 'spring'
 end
 
+gem 'devise'
