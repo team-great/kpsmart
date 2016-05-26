@@ -4,9 +4,56 @@ class RoutesController < ApplicationController
   # GET /routes
   # GET /routes.json
   def index
+
     @routes = Route.all
+
   end
 
+  def find
+  end
+
+  def find2
+
+    graph = Graph.new
+    (1..City.all.length).each {|node| graph.push node }
+
+    Route.all.order(from_id: :asc).each do |route|
+      graph.connect_mutually route.from_id, route.to_id, route.duration.to_i
+    end
+
+    start_point = City.get_id_from_name(params[:city_from]).to_i # starting node
+    end_point = City.get_id_from_name(params[:city_to]).to_i # arrival node
+
+    results = graph.dijkstra(start_point, end_point)
+
+    if results == nil
+      @results = [name: 'no route found']
+      @distance = 0
+      return
+    end
+
+    distance = results[:distance] #graph.length_between(start_point, end_point)
+
+    names = []
+    results[:path].each do |res|
+      name = City.find_by(id: res)
+      names.push name
+    end
+
+    #puts 'names: '+names.to_s
+    #puts 'cost: '+distance.to_s
+
+    #p graph
+    #p graph.dijkstra(start_point, end_point)
+    #p graph.length_between(2, 1)
+    #p graph.neighbors(1)
+    #p graph.dijkstra(1) # => { paths: { node1: [src, node2, dest] }, distances: { node1: 2 } }
+    #p graph.dijkstra(2, 1) # => { path: [src, node2, dest], distance: 2 }
+
+    @results = names
+    @distance = distance
+
+  end
   # GET /routes/1
   # GET /routes/1.json
   def show
