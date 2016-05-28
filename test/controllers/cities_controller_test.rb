@@ -11,6 +11,12 @@ class CitiesControllerTest < ActionController::TestCase
     assert_not_nil assigns(:cities)
   end
 
+  test "should get index json" do
+    res = get :index, format: :json
+    JSON.parse res.body
+    assert_response :success
+  end
+
   test "should get new" do
     get :new
     assert_response :success
@@ -18,14 +24,32 @@ class CitiesControllerTest < ActionController::TestCase
 
   test "should create city" do
     assert_difference('City.count') do
-      post :create, city: {  }
+      post :create, city: { name: "wow" }
     end
 
     assert_redirected_to city_path(assigns(:city))
   end
 
+  test "should create city no params" do
+    assert_no_difference('City.count') do
+      post :create
+    end
+  end
+
+  test "should create city duplicate params" do
+    assert_no_difference('City.count') do
+      post :create, city: { name: @city.name }
+    end
+  end
+
   test "should show city" do
     get :show, id: @city
+    assert_response :success
+  end
+
+  test "should show city json" do
+    res = get :show, id: @city, format: :json
+    JSON.parse res.body
     assert_response :success
   end
 
