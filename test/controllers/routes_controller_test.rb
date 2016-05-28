@@ -3,8 +3,8 @@ require 'test_helper'
 class RoutesControllerTest < ActionController::TestCase
   setup do
     @route = routes(:one)
-    @wellington = cities(:Wellington)
-    @auckland = cities(:Auckland)
+    @wellington = cities(:wellington)
+    @auckland = cities(:auckland)
   end
 
   test "should get index" do

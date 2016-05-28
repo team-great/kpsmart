@@ -1,8 +1,8 @@
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
 one:
-  to_id: 1
-  from_id: 2
+  to: wellington
+  from: auckland
   priority: 1
   provider: MyString
   weight_cost: 9.99
@@ -13,11 +13,11 @@ one:
   max_volume: 9.99
   duration: 9.99
   frequency: 1
-  day: MyString
+  day: Monday
 
 two:
-  to_id: 1
-  from_id: 2
+  to: wellington
+  from: auckland
   priority: 1
   provider: MyString
   weight_cost: 9.99
@@ -28,4 +28,4 @@ two:
   max_volume: 9.99
   duration: 9.99
   frequency: 1
-  day: MyString
+  day: Tuesday
