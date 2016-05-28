@@ -50,4 +50,20 @@ class RoutesControllerTest < ActionController::TestCase
 
     assert_redirected_to routes_path
   end
+
+  test "should get find" do
+    get :find
+    assert_response :success
+  end
+
+  test "should get results without parameters" do
+    get :results
+    assert_response :success
+  end
+
+  test "should get results with paramters" do
+    get :results, city_to: @auckland.name, city_from: @wellington.name
+    assert_response :success
+  end
+
 end

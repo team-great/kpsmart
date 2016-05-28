@@ -2,7 +2,7 @@ Rails.application.routes.draw do
   root 'welcome#index'
 
   get 'routes/find/', to: 'routes#find'
-  get 'routes/find/:', to: 'routes#find2'
+  get 'routes/find/results', to: 'routes#results'
   resources :routes
   resources :cities
   resources :reports

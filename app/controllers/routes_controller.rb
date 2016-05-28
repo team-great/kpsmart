@@ -9,10 +9,12 @@ class RoutesController < ApplicationController
 
   end
 
+  # GET /find
   def find
   end
 
-  def find2
+  # GET /find/results
+  def results
 
     result = get_route params[:city_from], params[:city_to]
     @results = result[:results]
