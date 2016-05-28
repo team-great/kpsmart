@@ -16,7 +16,8 @@ one:
   day: MyString
 
 two:
-  from_id: 1
+  to_id: 1
+  from_id: 2
   priority: 1
   provider: MyString
   weight_cost: 9.99

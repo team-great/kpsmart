@@ -1,12 +1,24 @@
 class RoutesController < ApplicationController
+  include RoutesHelper
   before_action :set_route, only: [:show, :edit, :update, :destroy]
-
   # GET /routes
   # GET /routes.json
   def index
+
     @routes = Route.all
+
   end
 
+  def find
+  end
+
+  def find2
+
+    result = get_route params[:city_from], params[:city_to]
+    @results = result[:results]
+    @distance = result[:distance]
+
+  end
   # GET /routes/1
   # GET /routes/1.json
   def show
@@ -69,13 +81,13 @@ class RoutesController < ApplicationController
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_route
-      @route = Route.find_by(id: params[:id])
-    end
+  # Use callbacks to share common setup or constraints between actions.
+  def set_route
+    @route = Route.find_by(id: params[:id])
+  end
 
-    # Whitelist parameters
-    def route_params
-      params.require(:route).permit(:to_name, :from_name, :priority_name, :provider, :weight_cost, :weight_price, :volume_cost, :volume_price, :max_weight, :max_volume, :duration, :frequency, :day)
-    end
+  # Whitelist parameters
+  def route_params
+    params.require(:route).permit(:to_name, :from_name, :priority, :priority_name, :provider, :weight_cost, :volume_cost, :weight_price, :volume_price, :max_weight, :max_volume, :duration, :frequency, :day)
+  end
 end
