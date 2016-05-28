@@ -9,6 +9,60 @@ class RoutesController < ApplicationController
 
   end
 
+  #GET /routes/new_from_xml
+  def new_from_xml
+  end
+
+  #POST /routes/new_from_xml/submit
+  def new_from_xml_results
+
+    doc = Nokogiri::XML(params[:xml_data])
+
+    doc.root.xpath('//cost').each do |cost|
+      compay = cost.xpath('company').text
+      to = cost.xpath('to').text
+      from = cost.xpath('from').text
+      type = cost.xpath('type').text
+      weightcost = cost.xpath('weightcost').text
+      volumecost = cost.xpath('volumecost').text
+      maxWeight = cost.xpath('maxWeight').text
+      maxVolume = cost.xpath('maxVolume').text
+      duration = cost.xpath('duration').text
+      frequency = cost.xpath('frequency').text
+      day = cost.xpath('day').text
+      route_params = {provider: compay,
+                      to_name: to,
+                      from_name: from,
+                      priority_name: type,
+                      weight_cost: weightcost,
+                      volume_price: volumecost,
+                      max_weight: maxWeight,
+                      max_volume: maxVolume,
+                      duration: duration,
+                      frequency: frequency,
+                      day: day}
+      to_id = City.get_id_from_name(to)
+      from_id = City.get_id_from_name(from)
+      if !to_id || !from_id
+        puts 'error one of these cities cant be found: '+ to.to_s + ' id:'+ to_id.to_s + "  " + from.to_s + " id: " + from_id.to_s
+        break
+      end
+      route = Route.find_or_initialize_by({to_id: to_id, from_id: from_id, provider: compay})
+      route.priority_name = type
+      route.weight_cost = weightcost
+      route.volume_price = volumecost
+      route.max_weight = maxWeight
+      route.max_volume = maxVolume
+      route.duration = duration
+      route.frequency = frequency
+      route.day = day
+      route.save
+    end
+
+
+    #@results = doc.root
+  end
+
   def find
   end
 
@@ -19,6 +73,7 @@ class RoutesController < ApplicationController
     @distance = result[:distance]
 
   end
+
   # GET /routes/1
   # GET /routes/1.json
   def show

@@ -1,0 +1,10 @@
+<h1>Add/Update Route from XML data</h1>
+
+
+<%= form_tag 'submit', :id => 'my_form' do -%>
+    Copy/Paste:
+    <br>
+    <%= submit_tag 'Submit' %>
+    <br>
+    <%= text_area_tag :xml_data, nil, :rows=>50, :cols=>60 %>
+<% end -%>
