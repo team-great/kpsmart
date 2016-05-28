@@ -60,4 +60,17 @@ class CityTest < ActiveSupport::TestCase
     routes_via_name
     assert_equal [@to, @from], @city.routes
   end
+
+  test "can find city by name" do
+    city = City.get_id_from_name @city.name
+
+    assert_equal @city.id, city
+  end
+
+  test "cannot find non-existing city by name" do
+    city = City.get_id_from_name ""
+
+    assert_equal nil, city
+  end
+
 end
