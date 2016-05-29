@@ -17,10 +17,10 @@ class Graph < Array
 
   def connect(src, dst, length = 1)
     unless self.include?(src)
-      raise ArgumentException, "No such vertex: #{src}"
+      raise ArgumentError, "No such vertex: #{src}"
     end
     unless self.include?(dst)
-      raise ArgumentException, "No such vertex: #{dst}"
+      raise ArgumentError, "No such vertex: #{dst}"
     end
     @edges.push Edge.new(src, dst, length)
   end

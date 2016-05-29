@@ -9,7 +9,7 @@ module RoutesHelper
   #   On failure: nil
   def get_route(start_city, end_city)
     graph = Graph.new
-    (1..City.all.length).each {|node| graph.push node }
+    City.all.each {|node| graph.push node.id }
 
     Route.all.order(from_id: :asc).each do |route|
       graph.connect_mutually route.from_id, route.to_id, route.duration.to_i
