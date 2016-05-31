@@ -7,10 +7,16 @@ module RoutesHelper
   # Returns:
   #   On successful: an object which contains distance and routes
   #   On failure: nil
-  def get_route(start_city, end_city)
-    graph = Graph.new
-    (1..City.all.length).each {|node| graph.push node }
+  def get_route(start_city, end_city, priority)
 
+    graph = Graph.new
+
+    
+    City.all.each do |city|
+      graph.push city.id
+    end
+
+    # Todo : after seeded data is extended connect_mutually will need to be replaced with "connect"
     Route.all.order(from_id: :asc).each do |route|
       graph.connect_mutually route.from_id, route.to_id, route.duration.to_i
     end
