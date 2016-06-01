@@ -72,6 +72,6 @@ class MailDeliveriesController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def mail_delivery_params
-      params.require(:mail_delivery).permit(:day, :to_name, :from_name, :weight, :size, :priority_name)
+      params.require(:mail_delivery).permit(:day, :to_name, :from_name, :weight, :volume, :priority_name)
     end
 end

@@ -2,16 +2,16 @@
 
 one:
   day: 'Monday'
-  to_id: 1
-  from_id: 2
-  weight: 9.99
-  size: 9.99
+  to: wellington
+  from: auckland
+  weight: 1
+  volume: 1
   priority: Air
 
 two:
   day: 'Tuesday'
-  to_id: 2
-  from_id: 1
-  weight: 9.99
-  size: 9.99
+  to: auckland
+  from: wellington
+  weight: 1
+  volume: 1
   priority: Sea
