@@ -1,4 +1,6 @@
 class MailDelivery < ActiveRecord::Base
+  belongs_to :to, class_name: 'City'
+  belongs_to :from, class_name: 'City'
   has_and_belongs_to_many :routes
   #represents a single peice of mail traveling through the system
   attr_accessor :to_name, :from_name, :priority_name
@@ -9,6 +11,20 @@ class MailDelivery < ActiveRecord::Base
     convert_node_names_to_ids
     convert_priority_to_int
 
+  end
+
+  # busniness facing cost
+  def total_cost
+    self.routes.inject(0) do |sum, r|
+      sum += (self.weight * r.weight_cost) + (self.volume * r.volume_cost)
+    end
+  end
+
+  # customer facing price
+  def total_price
+    self.routes.inject(0) do |sum, r|
+      sum += (self.weight * r.weight_price) + (self.volume * r.volume_price)
+    end
   end
 
   private
@@ -57,5 +73,6 @@ class MailDelivery < ActiveRecord::Base
     end
 
   end
+
 
 end

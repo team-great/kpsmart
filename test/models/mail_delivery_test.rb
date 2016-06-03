@@ -7,12 +7,19 @@ class MailDeliveryTest < ActiveSupport::TestCase
 
     @to_city = cities(:one)
     @from_city = cities(:two)
+
+    @route = routes(:one)
   end
 
   def teardown
     @delivery = nil
     @to_city = nil
     @from_city = nil
+  end
+
+  def has_route
+    @delivery.routes << @route
+    @delivery.save
   end
 
   test "setting priority_name to air will not error" do
@@ -48,6 +55,16 @@ class MailDeliveryTest < ActiveSupport::TestCase
   test "setting from_name to unkown city will have an error" do
     @delivery.update(from_name: "Lost City of Alantis")
     assert_not_empty @delivery.errors[:from_name]
+  end
+
+  test "mail delivery has a total cost" do
+    has_route
+    assert_equal 19.98, @delivery.total_cost.to_f
+  end
+
+  test "mail delivery has a total price" do
+    has_route
+    assert_equal 19.98, @delivery.total_price.to_f
   end
 
 end

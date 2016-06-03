@@ -3,10 +3,15 @@ Rails.application.routes.draw do
 
   get 'routes/find/', to: 'routes#find'
   get 'routes/find/results', to: 'routes#results'
+
   resources :routes
   resources :cities
-  resources :reports
   resources :mail_deliveries
+
+  scope "reports" do
+    get '/', to: 'reports#index'
+    get '/revenue', to: 'reports#revenue'
+  end
 
   devise_for :users
 end
