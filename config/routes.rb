@@ -4,6 +4,8 @@ Rails.application.routes.draw do
   get 'routes/find/', to: 'routes#find'
   get 'routes/find/results', to: 'routes#results'
 
+  get 'log', to: 'event_log#index'
+
   resources :routes
   resources :cities
   resources :mail_deliveries

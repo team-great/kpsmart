@@ -4,8 +4,6 @@ class City < ActiveRecord::Base
 
   validates :name, presence: true, uniqueness: true
 
-  has_paper_trail
-
   def routes
 
     self.to + self.from

@@ -111,12 +111,12 @@ mail_delivery.each do |mail|
   to = City.where(name: mail[1]).first_or_create.name
   from = City.where(name: mail[2]).first_or_create.name
 
-  m = MailDelivery.create(day: mail[0],
-                   to_name: to,
-                   from_name: from,
-                   weight: mail[3],
-                   size: mail[4],
-                   priority_name: mail[5])
+	m = MailDelivery.create(day: mail[0],
+									 to_name: to,
+									 from_name: from,
+									 weight: mail[3],
+									 volume: mail[4],
+									 priority_name: mail[5])
 
   unless m.save
 
