@@ -1,5 +1,16 @@
 <div class="row">
-<strong>From:</strong> <%= event.from %>
-<strong>To:</strong> <%= event.to %>
-<%= link_to "Show", mail_delivery_path(event.id) %>
+  <div class="col-sm-3">
+    <span>
+      <strong>From:</strong> <%= event.from %>
+    </span>
+  </div>
+  <div class="col-sm-3">
+    <span>
+      <strong>To:</strong> <%= event.to %>
+    </span>
+  </div>
+  <div class="col-sm-1">
+  </div>
 </div>
+<%= link_to "Show", mail_delivery_path(event.id) %>
+<br/>

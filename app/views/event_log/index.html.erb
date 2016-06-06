@@ -1,13 +1,13 @@
-<ul>
+<ul class="list-group">
   <% @events.each do |event| %>
-    <li>
+    <li class="list-group-item">
       <h2><%= event.name %></h2>
       <% if event.type == :mail %>
         <%= render 'mail_event', event: event %>
       <% elsif event.type == :create %>
         <%= render 'create_event', event: event %>
       <% else %>
-        <%= render 'change_event', event: event %>
+        <%= render 'update_event', event: event %>
       <% end %>
       <small><%= event.created_at.to_s %></small>
     </li>

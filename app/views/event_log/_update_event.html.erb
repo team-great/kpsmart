@@ -1,14 +1,36 @@
-<% event.changeset.each do |change| %>
-  <div class="row">
-    <div class="col-xs-3">
-      <%= change.first %>
-    </div>
-    <div class="col-xs-3">
-      <%= change.last.first || "Nothing" %>
-    </div>
-    <div class="col-xs-1"> =&gt; </div>
-    <div class="col-xs-3">
-      <%= change.last.last %>
-    </div>
+<div>
+  <button class="btn btn-default" type="button" data-toggle="collapse" href="#update_<%= event.id %>"
+    data-target="#update_<%= event.id %>">
+    Details
+  </button>
+  <div class="collapse" id="update_<%= event.id %>">
+    <table class="table table-striped">
+      <thead>
+        <tr>
+          <th>Property</th>
+          <th>Old Value</th>
+          <th>&nbsp;</th>
+          <th>New Value</th>
+        </tr>
+      </thead>
+      <tbody>
+        <% event.changeset.each do |change| %>
+          <tr>
+            <td>
+              <%= change.first %>
+            </td>
+            <td>
+              <%= change.last.first %>
+            </td>
+            <td>
+              =&gt;
+            </td>
+            <td>
+              <%= change.last.last %>
+            </td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
   </div>
-<% end %>
+</div>
