@@ -1,14 +1,11 @@
-<h1>KPSmart</h1>
-<h2>Making KPS Great Again</h2>
-
-<% if !@loggedin%>
-    <h2>you are not logged in</h2>
-<% else %>
-    <h2>you are logged in</h2>
-<% end%>
-
-
-
-
-
-<p> Welcome to KPSmart</p>
+<div class='jumbotron'>
+	<h1>KPSmart</h1>
+	<h2>Making KPS Great Again</h2>
+		<br>
+		<% if !@loggedin%>
+			<p>You aren't signed in.</p>
+			<a href="users/sign_in"> Please sign in here.</a> 
+		<% else %>
+		    <p>You are logged in.</p>
+		<% end%>		
+</div>
