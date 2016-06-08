@@ -1,9 +1,9 @@
 <div>
-  <button class="btn btn-default" type="button" data-toggle="collapse" href="#update_<%= event.id %>"
-    data-target="#update_<%= event.id %>">
+  <button class="btn btn-default" type="button" data-toggle="collapse" href="#update_<%= event.id %>_<%= event.hash %>"
+    data-target="#update_<%= event.id %>_<%= event.hash %>">
     Details
   </button>
-  <div class="collapse" id="update_<%= event.id %>">
+  <div class="collapse" id="update_<%= event.id %>_<%= event.hash %>">
     <table class="table table-striped">
       <thead>
         <tr>
