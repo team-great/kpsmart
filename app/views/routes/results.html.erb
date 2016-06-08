@@ -1,7 +1,9 @@
 <h1>Find Route RESULTS</h1>
 
-<% @results.each do |r| %>
-    <p><%= r[:name] %></p>
+<% if @valid %>
+  <% @results.each do |r| %>
+      <p><%= r.name %></p>
+  <% end %>
 <% end %>
 
 <p>distance: <%= @distance %> </p>

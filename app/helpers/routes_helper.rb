@@ -2,6 +2,16 @@ require 'routing/graph'
 
 module RoutesHelper
 
+  class RouteResult
+
+    attr_reader :valid, :results, :distance
+    def initialize(params)
+      @valid = params[:valid]
+      @results = params[:results]
+      @distance = params[:distance] || 0
+    end
+
+  end
 
   # Get a route between the the starting city and end city
   # Returns:
@@ -21,11 +31,9 @@ module RoutesHelper
     results = graph.dijkstra(start_point, end_point)
 
     if results == nil
-      return {
-        valid: false,
+      return RouteResult.new  valid: false,
         results: [name: "No route found"],
         distance: 0
-      }
     end
 
     distance = results[:distance] #graph.length_between(start_point, end_point)
@@ -36,11 +44,8 @@ module RoutesHelper
       names.push name
     end
 
-    return {
-      valid: true,
+    return RouteResult.new valid: true,
       results: names,
       distance: distance
-    }
-
   end
 end

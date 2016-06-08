@@ -17,8 +17,9 @@ class RoutesController < ApplicationController
   def results
 
     result = get_route params[:city_from], params[:city_to]
-    @results = result[:results]
-    @distance = result[:distance]
+    @valid = result.valid
+    @results = result.results
+    @distance = result.distance
 
   end
   # GET /routes/1
