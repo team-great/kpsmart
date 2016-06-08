@@ -18,18 +18,18 @@ class RoutesHelperTests < ActiveSupport::TestCase
   test "can route to no where" do
     result = get_route "", ""
 
-    assert_not result[:valid]
-    assert_equal 0, result[:distance]
+    assert_not result.valid
+    assert_equal 0, result.distance
   end
 
   test "can route to wlg to akl" do
     result = get_route @wellington.name, @auckland.name
-    assert result[:valid]
+    assert result.valid
   end
 
   test "cannot route to wlg to one" do
     result = get_route @wellington.name, @city_one.name
-    assert_not result[:valid]
+    assert_not result.valid
   end
 
 end
