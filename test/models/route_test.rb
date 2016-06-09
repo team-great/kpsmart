@@ -3,10 +3,10 @@ require 'test_helper'
 class RouteTest < ActiveSupport::TestCase
 
   def setup
-    @route = routes(:one)
+    @route = build(:route)
 
-    @to_city = cities(:wellington)
-    @from_city = cities(:auckland)
+    @to_city = create(:city)
+    @from_city = create(:city)
   end
 
   def teardown
@@ -25,7 +25,7 @@ class RouteTest < ActiveSupport::TestCase
   end
 
   ## Validation tests
-  
+
   test "setting priority_name to air will not error" do
     @route.update(priority_name: "Air")
     assert_empty @route.errors[:priority_name]
@@ -53,23 +53,6 @@ class RouteTest < ActiveSupport::TestCase
 
   test "setting from_name to kown city will not error" do
     @route.update(from_name: @from_city.name)
-    @route.errors.each do |r, t|
-      puts r
-      puts r
-      puts r
-      puts r
-      puts r
-      puts r
-      puts r
-      puts r
-      puts r
-      puts t
-      puts t
-      puts t
-      puts t
-      puts t
-      puts t
-    end
     assert_empty @route.errors[:from_name]
   end
 
@@ -89,7 +72,7 @@ class RouteTest < ActiveSupport::TestCase
   end
 
   test "can update volume cost to 0" do
-    @route.update(volume_cost: 0) # FIXME: probably not best to allow cost to be updated to 0
+    @route.update(volume_cost: 0)
     assert_empty @route.errors[:volume_cost]
   end
 
@@ -104,7 +87,7 @@ class RouteTest < ActiveSupport::TestCase
   end
 
   test "can update weight cost to 0" do
-    @route.update(weight_cost: 0) # FIXME: probably not best to allow cost to be updated to 0
+    @route.update(weight_cost: 0)
     assert_empty @route.errors[:weight_cost]
   end
 
@@ -119,7 +102,7 @@ class RouteTest < ActiveSupport::TestCase
   end
 
   test "can update weight max to 0" do
-    @route.update(max_weight: 0) # FIXME: probably not best to allow max to be updated to 0
+    @route.update(max_weight: 0)
     assert_empty @route.errors[:max_weight]
   end
 
@@ -134,7 +117,7 @@ class RouteTest < ActiveSupport::TestCase
   end
 
   test "can update volume max to 0" do
-    @route.update(max_volume: 0) # FIXME: probably not best to allow max to be updated to 0
+    @route.update(max_volume: 0)
     assert_empty @route.errors[:max_volume]
   end
 
@@ -149,7 +132,7 @@ class RouteTest < ActiveSupport::TestCase
   end
 
   test "can update duration  to 0" do
-    @route.update(duration: 0) # FIXME: so fast, too fast? 
+    @route.update(duration: 0)
     assert_empty @route.errors[:duration]
   end
 
@@ -164,7 +147,7 @@ class RouteTest < ActiveSupport::TestCase
   end
 
   test "can update frequency to 0" do
-    @route.update(frequency: 0) # FIXME: so fast, too fast? 
+    @route.update(frequency: 0)
     assert_empty @route.errors[:frequency]
   end
 

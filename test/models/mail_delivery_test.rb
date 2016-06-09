@@ -3,12 +3,12 @@ require 'test_helper'
 class MailDeliveryTest < ActiveSupport::TestCase
 
   def setup
-    @delivery = mail_deliveries(:one)
+    @delivery = build(:mail)
 
-    @to_city = cities(:one)
-    @from_city = cities(:two)
+    @to_city = create(:city)
+    @from_city = create(:city)
 
-    @route = routes(:one)
+    @route = create(:route)
   end
 
   def teardown
@@ -59,12 +59,12 @@ class MailDeliveryTest < ActiveSupport::TestCase
 
   test "mail delivery has a total cost" do
     has_route
-    assert_equal 19.98, @delivery.total_cost.to_f
+    assert_equal 20.0, @delivery.total_cost.to_f
   end
 
   test "mail delivery has a total price" do
     has_route
-    assert_equal 19.98, @delivery.total_price.to_f
+    assert_equal 10.0, @delivery.total_price.to_f
   end
 
   test "volume is greater than 0" do

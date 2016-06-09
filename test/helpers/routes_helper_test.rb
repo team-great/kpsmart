@@ -4,15 +4,18 @@ class RoutesHelperTests < ActiveSupport::TestCase
   include RoutesHelper
 
   def setup
-    @wellington = cities(:wellington)
-    @auckland = cities(:auckland)
-    @city_one = cities(:one)
+    @wellington = create(:city)
+    @auckland = create(:city)
+    @city_one = create(:city)
+
+    @route = create(:route, from: @wellington, to: @auckland)
   end
 
   def teardown
     @wellington = nil
     @auckland = nil
     @city_one = nil
+    @route = nil
   end
 
   test "can route to no where" do

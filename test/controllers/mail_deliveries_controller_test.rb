@@ -1,15 +1,15 @@
 require 'test_helper'
 
 class MailDeliveriesControllerTest < ActionController::TestCase
-  setup do
-    @mail_delivery = mail_deliveries(:one)
+  def setup
+    @mail_delivery = create(:mail)
 
-    @to_city = cities(:wellington)
-    @from_city = cities(:auckland)
+    @to_city = build(:city)
+    @from_city = build(:city)
   end
 
   def teardown
-    @mail_delivery = nil
+    @mail_delivery.destroy
 
     @to_city = nil
     @from_city = nil
@@ -28,7 +28,7 @@ class MailDeliveriesControllerTest < ActionController::TestCase
 
   test "should create mail_delivery" do
     assert_difference('MailDelivery.count') do
-      post :create, mail_delivery: {:to_name => @to_city.name, :from_name => @from_city.name, weight: @mail_delivery.weight, volume: @mail_delivery.volume, priority_name: @mail_delivery.priority}
+      post :create, {:to_name => @to_city.name, :from_name => @from_city.name, mail_delivery: attributes_for(:mail) }
     end
 
     assert_redirected_to mail_delivery_path(assigns(:mail_delivery))

@@ -3,10 +3,9 @@ require 'test_helper'
 class CityTest < ActiveSupport::TestCase
 
   def setup
-    @city = cities(:one)
-    @to = routes(:one)
-    @from = routes(:two)
-
+    @city = create(:city)
+    @to = build(:route)
+    @from = build(:route)
   end
 
   def teardown
