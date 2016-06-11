@@ -1,6 +1,6 @@
 module EventLogHelper
   class Event
-    attr_reader :type, :name, :id, :changeset, :created_at, :to, :from
+    attr_reader :type, :name, :id, :whodunnit, :changeset, :created_at, :to, :from
     def initialize(params)
       @name = params[:name]
       @id = params[:id]
@@ -10,6 +10,12 @@ module EventLogHelper
 
       @to = params[:to]
       @from = params[:from]
+
+      whodunnit_id = params[:whodunnit]
+      if whodunnit_id
+        dunnit = User.find_by(id: whodunnit_id)
+        @whodunnit = dunnit.email # FIXME: should not use emails but names, but user has no names
+      end
 
       if @to.nil? ^ @from.nil?
         raise 'Given a to or a from, both must be set'
@@ -31,16 +37,20 @@ module EventLogHelper
                   id: event.item_id,
                   type: :create,
                   changeset: event.changeset,
-                  created_at: event.created_at
+                  created_at: event.created_at,
+                  whodunnit: event.whodunnit
       elsif event.changeset
         Event.new name: 'Route Update',
                   type: :update,
                   changeset: event.changeset,
-                  created_at: event.created_at
+                  created_at: event.created_at,
+                  whodunnit: event.whodunnit
+
       else
         puts "still got event type #{event} to do"
         Event.new name: 'unkown',
-                  created_at: event.created_at
+                  created_at: event.created_at,
+                  whodunnit: event.whodunnit
       end
     end
 
@@ -50,8 +60,9 @@ module EventLogHelper
                 to: mail.to.name,
                 from: mail.from.name,
                 created_at: mail.created_at
+                # FIXME: Add responsibility to making a mail delivery object
     end
 
-    (events + mails).sort { |a, b| b.created_at <=> a.created_at }
+    (events + mails).sort_by(&:created_at).reverse!
   end
 end

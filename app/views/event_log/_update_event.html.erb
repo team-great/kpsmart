@@ -1,4 +1,7 @@
 <div>
+  <p>
+    Updated by <%= event.whodunnit || "Unknown" %>
+  </p>
   <button class="btn btn-default" type="button" data-toggle="collapse" href="#update_<%= event.id %>_<%= event.hash %>"
     data-target="#update_<%= event.id %>_<%= event.hash %>">
     Details

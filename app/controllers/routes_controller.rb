@@ -1,6 +1,8 @@
 class RoutesController < ApplicationController
   include RoutesHelper
   before_action :set_route, only: [:show, :edit, :update, :destroy]
+  before_filter :set_paper_trail_whodunnit
+
   # GET /routes
   # GET /routes.json
   def index
