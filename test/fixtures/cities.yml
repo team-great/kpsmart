@@ -1,12 +1,12 @@
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
 wellington:
-  name: Wellington
+  name: 'Wellington'
   latitude: 9.99
   longitude: 9.99
 
 auckland:
-  name: Auckland
+  name: 'Auckland'
   latitude: 9.99
   longitude: 9.99
 

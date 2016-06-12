@@ -3,14 +3,16 @@ require 'routing/graph'
 module RoutesHelper
 
 
-  # Get a route between the the starting city and end city
+  # Get a path between the the starting city and end city
   # Returns:
-  #   On successful: an object which contains distance and routes
+  #   On successful: a hash which contains distance and routes
   #   On failure: nil
   def get_route(start_city, end_city)
     graph = Graph.new
     City.all.each {|node| graph.push node.id }
 
+
+    #TODO: change to connect once seeds are corrected
     Route.all.order(from_id: :asc).each do |route|
       graph.connect_mutually route.from_id, route.to_id, route.duration.to_i
     end

@@ -57,6 +57,8 @@ class Route < ActiveRecord::Base
 
   def convert_node_names_to_ids
 
+
+
     # stop to/from ids from getting nilled from missing *_name's
     if to_name
       to_id = City.get_id_from_name(to_name)

@@ -4,7 +4,7 @@
       <h2><%= pluralize(@route.errors.count, "error") %> prohibited this route from being saved:</h2>
 
       <ul>
-      <% @route.errors.each do |test, message| %>
+      <% @route.errors.each do |name, message| %>
         <li><%= message %></li>
       <% end %>
       </ul>
@@ -22,7 +22,7 @@
     <% end %>
 
     <%= label_tag 'priority'%><br>
-    <%= f.number_field :priority %><br>
+    <%= f.text_field :priority %><br>
     <%= label_tag 'provider'%><br>
     <%= f.text_field :provider %><br>
     <%= label_tag 'weight_cost'%><br>
