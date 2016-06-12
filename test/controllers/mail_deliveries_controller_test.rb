@@ -2,17 +2,11 @@ require 'test_helper'
 
 class MailDeliveriesControllerTest < ActionController::TestCase
   def setup
-    @mail_delivery = create(:mail)
+    @mail_delivery = create(:mail, :with_route)
 
-    @to_city = build(:city)
-    @from_city = build(:city)
-  end
-
-  def teardown
-    @mail_delivery.destroy
-
-    @to_city = nil
-    @from_city = nil
+    @to_city = create(:city)
+    @from_city = create(:city)
+    create(:route, to: @to_city, from: @from_city)
   end
 
   test "should get index" do
@@ -28,9 +22,8 @@ class MailDeliveriesControllerTest < ActionController::TestCase
 
   test "should create mail_delivery" do
     assert_difference('MailDelivery.count') do
-      post :create, {:to_name => @to_city.name, :from_name => @from_city.name, mail_delivery: attributes_for(:mail) }
+      post :create,  mail_delivery: attributes_for(:mail, :with_route, to_name: @to_city.name, from_name: @from_city.name)
     end
-
     assert_redirected_to mail_delivery_path(assigns(:mail_delivery))
   end
 
@@ -45,13 +38,13 @@ class MailDeliveriesControllerTest < ActionController::TestCase
   end
 
   test "should update mail_delivery" do
-    patch :update, id: @mail_delivery, mail_delivery: {:to_name => @to_city.name, :from_name => @from_city.name, weight: @mail_delivery.weight, volume: 2.16, priority_name: @mail_delivery.priority}
+    patch :update, id: @mail_delivery, mail_delivery: attributes_for(:mail, volume: 10)
     assert_redirected_to mail_delivery_path(assigns(:mail_delivery))
   end
 
   test "should create json" do
     assert_difference('MailDelivery.count') do
-      res = post :create, :to_name => @to_city.name, :from_name => @from_city.name, mail_delivery: attributes_for(:mail), format: :json
+      res = post :create, mail_delivery: attributes_for(:mail, :with_route, to_name: @to_city.name, from_name: @from_city.name), format: :json
       JSON.parse res.body
     end
 

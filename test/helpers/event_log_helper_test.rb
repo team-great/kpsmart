@@ -8,12 +8,7 @@ class EventLogHelperTests < ActiveSupport::TestCase
   end
 
   def create_delivery
-    @delivery = create(:mail)
-  end
-
-  def teardown
-    @route = nil unless @route.nil?
-    @delivery = nil unless @delivery.nil?
+    @delivery = create(:mail, :with_route)
   end
   
   test "has route creation event" do

@@ -5,10 +5,6 @@ class CitiesControllerTest < ActionController::TestCase
     @city = create(:city)
   end
 
-  def teardown
-    @city = nil
-  end
-
   test "should get index" do
     get :index
     assert_response :success

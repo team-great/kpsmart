@@ -7,12 +7,6 @@ class RoutesControllerTest < ActionController::TestCase
     @auckland = create(:city)
   end
 
-  def teardown
-    @route.destroy
-    @wellington.destroy
-    @auckland.destroy
-  end
-
   test "should get index" do
     get :index
     assert_response :success

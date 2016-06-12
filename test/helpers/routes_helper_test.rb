@@ -11,13 +11,6 @@ class RoutesHelperTests < ActiveSupport::TestCase
     @route = create(:route, from: @wellington, to: @auckland)
   end
 
-  def teardown
-    @wellington = nil
-    @auckland = nil
-    @city_one = nil
-    @route = nil
-  end
-
   test "can route to no where" do
     result = get_route "", ""
 

@@ -1,6 +1,7 @@
 require 'routing/graph'
 
 class MailDelivery < ActiveRecord::Base
+  include RoutesHelper
   belongs_to :to, class_name: 'City'
   belongs_to :from, class_name: 'City'
   has_and_belongs_to_many :routes
@@ -54,8 +55,6 @@ class MailDelivery < ActiveRecord::Base
       else
         errors.add(:to_name, "#{to_name.capitalize} is not a valid city")
       end
-    else
-      errors.add(:to_name, 'Destination is a required field.')
     end
 
     if from_name
@@ -66,8 +65,6 @@ class MailDelivery < ActiveRecord::Base
       else
         errors.add(:from_name, "#{from_name.capitalize} is not a valid city")
       end
-    else
-      errors.add(:from_name, 'Origin is a required field.')
     end
 
   end
@@ -89,8 +86,6 @@ class MailDelivery < ActiveRecord::Base
       else
         errors.add(:priority_name, "#{priority_name} is not a valid priority")
       end
-    else
-      errors.add(:priority_name, 'The parcels priority must be given.')
     end
 
   end
@@ -103,25 +98,18 @@ class MailDelivery < ActiveRecord::Base
 
   def create_path
 
-    graph = Graph.new
-    City.all.each do |city| graph.push(city.id) end
-
-    Route.all.order(from_id: :asc).each do |route|
-      graph.connect_mutually route.from_id, route.to_id, route.duration.to_i
+    if self.to.nil?
+      errors.add(:to, "must have a distniation")
     end
+    if self.from.nil?
+      errors.add(:from, "must have a source")
+    end
+    return if errors.any?
 
-    results = graph.dijkstra(self.to_id, self.from_id)
+    results = get_route self.from.name, self.to.name
 
-    puts results
-    #puts results[:distance]
-
-    if results != nil and results[:distance] > 0
-      routes.clear
-      results[:path].each do |res|
-        self.routes << Route.find_by(id: res)
-      end
-    else
-      errors.add(:to_name, "Unable to find a route between '#{from_name}' and '#{to_name}'.")
+    if !results.valid
+      errors.add("Unable to find a route between '#{self.from.name}' and '#{self.to.name}'.")
     end
 
   end

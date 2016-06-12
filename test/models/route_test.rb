@@ -9,13 +9,6 @@ class RouteTest < ActiveSupport::TestCase
     @from_city = create(:city)
   end
 
-  def teardown
-    @route = nil
-
-    @to_city = nil
-    @from_city = nil
-  end
-
   ## Versioning / Route Event tests
 
   test "updating a route will produce a new verion" do

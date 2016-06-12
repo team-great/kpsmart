@@ -8,12 +8,6 @@ class CityTest < ActiveSupport::TestCase
     @from = build(:route)
   end
 
-  def teardown
-    @to = nil
-    @from = nil
-    @city = nil
-  end
-
   def routes_via_id
     @to.to = @city
     @from.from = @city
