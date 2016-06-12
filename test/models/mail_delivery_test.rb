@@ -4,22 +4,14 @@ class MailDeliveryTest < ActiveSupport::TestCase
 
   def setup
     @delivery = build(:mail)
-
-    @to_city = create(:city)
-    @from_city = create(:city)
-
-    @route = create(:route)
   end
 
   def teardown
     @delivery = nil
-    @to_city = nil
-    @from_city = nil
   end
 
   def has_route
-    @delivery.routes << @route
-    @delivery.save
+    @delivery = build(:mail, :with_route)
   end
 
   test "setting priority_name to air will not error" do
@@ -38,7 +30,7 @@ class MailDeliveryTest < ActiveSupport::TestCase
   end
 
   test "setting to_name to kown city will not error" do
-    @delivery.update(to_name: @to_city.name)
+    @delivery.update(to_name: @delivery.to.name)
     assert_empty @delivery.errors[:to_name]
   end
 
@@ -48,7 +40,7 @@ class MailDeliveryTest < ActiveSupport::TestCase
   end
 
   test "setting from_name to kown city will not error" do
-    @delivery.update(from_name: @from_city.name)
+    @delivery.update(from_name: @delivery.from.name)
     assert_empty @delivery.errors[:from_name]
   end
 

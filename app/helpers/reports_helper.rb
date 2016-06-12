@@ -10,6 +10,10 @@ module ReportsHelper
       @price = params[:price]
       @cost = params[:cost]
     end
+
+    def profit
+      price - cost
+    end
   end
 
   def revenue_report

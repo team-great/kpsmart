@@ -1,7 +1,7 @@
 FactoryGirl.define do
 
   factory :city do
-    name      { |n| "City ##{n.hash}" }
+    sequence(:name)      { |n| "City ##{n}" }
     latitude  0
     longitude 0
   end
