@@ -67,4 +67,24 @@ class MailDeliveryTest < ActiveSupport::TestCase
     assert_equal 19.98, @delivery.total_price.to_f
   end
 
+  test "volume is greater than 0" do
+    @delivery.update(volume: 0)
+    assert_not_empty @delivery.errors[:volume]
+  end
+
+  test "weight is greater than 0" do
+    @delivery.update(weight: 0)
+    assert_not_empty @delivery.errors[:weight]
+  end
+
+  test "volume is present" do
+    @delivery.update(volume: nil)
+    assert_not_empty @delivery.errors[:volume]
+  end
+
+  test "weight is present" do
+    @delivery.update(weight: nil)
+    assert_not_empty @delivery.errors[:weight]
+  end
+
 end

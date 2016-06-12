@@ -5,8 +5,8 @@ class RouteTest < ActiveSupport::TestCase
   def setup
     @route = routes(:one)
 
-    @to_city = cities(:one)
-    @from_city = cities(:two)
+    @to_city = cities(:wellington)
+    @from_city = cities(:auckland)
   end
 
   def teardown
@@ -53,6 +53,23 @@ class RouteTest < ActiveSupport::TestCase
 
   test "setting from_name to kown city will not error" do
     @route.update(from_name: @from_city.name)
+    @route.errors.each do |r, t|
+      puts r
+      puts r
+      puts r
+      puts r
+      puts r
+      puts r
+      puts r
+      puts r
+      puts r
+      puts t
+      puts t
+      puts t
+      puts t
+      puts t
+      puts t
+    end
     assert_empty @route.errors[:from_name]
   end
 

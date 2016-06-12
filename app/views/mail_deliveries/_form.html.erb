@@ -4,7 +4,7 @@
       <h2><%= pluralize(@mail_delivery.errors.count, "error") %> prohibited this mail_delivery from being saved:</h2>
 
       <ul>
-      <% @mail_delivery.errors.full_messages.each do |message| %>
+      <% @mail_delivery.errors.each do |name, message| %>
         <li><%= message %></li>
       <% end %>
       </ul>
@@ -12,6 +12,17 @@
   <% end %>
 
   <div class="actions">
+    <%= label_tag 'origin'%><br>
+    <%= f.text_field :from_name, value: @mail_delivery.from_id %><br>
+    <%= label_tag 'destination'%><br>
+    <%= f.text_field :to_name , value: @mail_delivery.to_id%><br>
+    <%= label_tag 'weight'%><br>
+    <%= f.number_field :weight, step: :any %><br>
+    <%= label_tag 'size'%><br>
+    <%= f.number_field :volume, step: :any %><br>
+    <%= label_tag 'priority'%><br>
+    <%= f.text_field :priority_name, value: @mail_delivery.priority %><br>
+
     <%= f.submit %>
   </div>
 <% end %>

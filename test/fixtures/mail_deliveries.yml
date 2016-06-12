@@ -2,16 +2,16 @@
 
 one:
   day: 'Monday'
-  to: wellington
-  from: auckland
+  to: 'Wellington'
+  from: 'Auckland'
   weight: 1
   volume: 1
-  priority: Air
+  priority: 'Air'
 
 two:
   day: 'Tuesday'
-  to: auckland
-  from: wellington
+  to: 'Auckland'
+  from: 'Wellington'
   weight: 1
   volume: 1
-  priority: Sea
+  priority: 'Sea'
