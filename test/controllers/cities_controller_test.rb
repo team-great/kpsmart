@@ -1,8 +1,8 @@
 require 'test_helper'
 
 class CitiesControllerTest < ActionController::TestCase
-  setup do
-    @city = cities(:one)
+  def setup
+    @city = create(:city)
   end
 
   test "should get index" do
@@ -24,7 +24,7 @@ class CitiesControllerTest < ActionController::TestCase
 
   test "should create city" do
     assert_difference('City.count') do
-      post :create, city: { name: "wow" }
+      post :create, city: attributes_for(:city)
     end
 
     assert_redirected_to city_path(assigns(:city))
@@ -38,7 +38,7 @@ class CitiesControllerTest < ActionController::TestCase
 
   test "should create city duplicate params" do
     assert_no_difference('City.count') do
-      post :create, city: { name: @city.name }
+      post :create, city: attributes_for(:city, name: @city.name)
     end
   end
 

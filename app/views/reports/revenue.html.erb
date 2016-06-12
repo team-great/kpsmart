@@ -11,13 +11,13 @@
   <% @mail.each do |mail| %>
     <tr class="">
 
-      <td><%= mail[:from] %></td>
-      <td><%= mail[:to] %></td>
-      <td>$<%= mail[:price] %></td>
-      <td>$<%= mail[:cost] %></td>
-      <td>$<%= mail[:price] - mail[:cost] %></td>
+      <td><%= mail.from %></td>
+      <td><%= mail.to %></td>
+      <td>$<%= mail.price %></td>
+      <td>$<%= mail.cost %></td>
+      <td>$<%= mail.profit %></td>
       <td>
-        <%= link_to "Show",  mail_delivery_url(mail[:id]) %>
+        <%= link_to "Show",  mail_delivery_url(mail.id) %>
       </td>
     </tr>
   <% end %>

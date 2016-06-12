@@ -1,10 +1,10 @@
 require 'test_helper'
 
 class RoutesControllerTest < ActionController::TestCase
-  setup do
-    @route = routes(:one)
-    @wellington = cities(:wellington)
-    @auckland = cities(:auckland)
+  def setup
+    @route = create(:route)
+    @wellington = create(:city)
+    @auckland = create(:city)
   end
 
   test "should get index" do
@@ -28,7 +28,7 @@ class RoutesControllerTest < ActionController::TestCase
     #needs cities to be populated before running
     #
     assert_difference('Route.count') do
-      post :create, to_name: 'Auckland', from_name: 'Wellington', route: {  priority: 'Air', provider: 'NZ POST', weight_cost: 5, weight_price: 5, volume_cost: 10, volume_price: 10, max_weight: 10, max_volume: 20, duration: 1, frequency: 1, day: 'Monday'}
+      post :create, to_name: @auckland.name, from_name: @wellington.name, route: attributes_for(:route)
     end
 
     assert_redirected_to route_path(assigns(:route))
@@ -36,7 +36,7 @@ class RoutesControllerTest < ActionController::TestCase
 
   test "request invalid, should not create route" do
     assert_no_difference('Route.count') do
-      post :create, route: { to_name: '', from_name: '', priority: 'Air', provider: 'NZ POST', weight_cost: 5, weight_price: 5, volume_cost: 10, volume_price: 10, max_weight: 10, max_volume: 20, duration: 1, frequency: 1, day: 'Monday'}
+      post :create, to_name: '', from_name: '', route: attributes_for(:route)
     end
   end
 

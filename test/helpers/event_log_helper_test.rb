@@ -2,42 +2,33 @@ require 'test_helper'
 
 class EventLogHelperTests < ActiveSupport::TestCase
   include EventLogHelper
-  fixtures :routes, :mail_deliveries
 
   def create_route
-    @route = routes(:one)
+    @route = create(:route)
   end
 
   def create_delivery
-    @delivery = mail_deliveries(:one)
-  end
-
-  def teardown
-    @route = nil unless @route.nil?
-    @delivery = nil unless @delivery.nil?
+    @delivery = create(:mail, :with_route)
   end
   
-  # FIXME: Tests disabled while trying to figure out best way to handle papertrail and fixtures
-  # test "has route creation event" do
-  #   with_versioning do 
-  #     create_route
+  test "has route creation event" do
+    with_versioning do 
+      create_route
 
-  #     events = get_events
-  #     puts events
+      events = get_events
 
-  #     assert_equal :create, events.last.type
-  #   end
-  # end
+      assert_equal :create, events.last.type
+    end
+  end
   
-  # test "has mail creation event" do
-  #   with_versioning do 
-  #     create_delivery
+  test "has mail creation event" do
+    with_versioning do 
+      create_delivery
 
-  #     events = get_events
-  #     puts events
+      events = get_events
 
-  #     assert_equal :mail, events.first.type
-  #   end
-  # end
+      assert_equal :mail, events.first.type
+    end
+  end
 end
 

@@ -3,23 +3,7 @@ require 'test_helper'
 class MailDeliveryTest < ActiveSupport::TestCase
 
   def setup
-    @delivery = mail_deliveries(:one)
-
-    @to_city = cities(:one)
-    @from_city = cities(:two)
-
-    @route = routes(:one)
-  end
-
-  def teardown
-    @delivery = nil
-    @to_city = nil
-    @from_city = nil
-  end
-
-  def has_route
-    @delivery.routes << @route
-    @delivery.save
+    @delivery = build(:mail, :with_route)
   end
 
   test "setting priority_name to air will not error" do
@@ -38,7 +22,7 @@ class MailDeliveryTest < ActiveSupport::TestCase
   end
 
   test "setting to_name to kown city will not error" do
-    @delivery.update(to_name: @to_city.name)
+    @delivery.update(to_name: @delivery.to.name)
     assert_empty @delivery.errors[:to_name]
   end
 
@@ -48,7 +32,7 @@ class MailDeliveryTest < ActiveSupport::TestCase
   end
 
   test "setting from_name to kown city will not error" do
-    @delivery.update(from_name: @from_city.name)
+    @delivery.update(from_name: @delivery.from.name)
     assert_empty @delivery.errors[:from_name]
   end
 
@@ -58,13 +42,11 @@ class MailDeliveryTest < ActiveSupport::TestCase
   end
 
   test "mail delivery has a total cost" do
-    has_route
-    assert_equal 19.98, @delivery.total_cost.to_f
+    assert_equal 20.0, @delivery.total_cost.to_f
   end
 
   test "mail delivery has a total price" do
-    has_route
-    assert_equal 19.98, @delivery.total_price.to_f
+    assert_equal 10.0, @delivery.total_price.to_f
   end
 
   test "volume is greater than 0" do
