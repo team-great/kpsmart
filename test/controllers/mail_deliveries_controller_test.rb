@@ -49,6 +49,21 @@ class MailDeliveriesControllerTest < ActionController::TestCase
     assert_redirected_to mail_delivery_path(assigns(:mail_delivery))
   end
 
+  test "should create json" do
+    assert_difference('MailDelivery.count') do
+      res = post :create, :to_name => @to_city.name, :from_name => @from_city.name, mail_delivery: attributes_for(:mail), format: :json
+      JSON.parse res.body
+    end
+
+    assert_response :success
+  end
+
+  test "should show mail json" do
+    res = get :show, id: @mail_delivery, format: :json
+    JSON.parse res.body
+    assert_response :success
+  end
+
   test "should destroy mail_delivery" do
     assert_difference('MailDelivery.count', -1) do
       delete :destroy, id: @mail_delivery
