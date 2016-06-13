@@ -1,30 +1,28 @@
 <p id="notice"><%= notice %></p>
 
+<h1>Existing Routes</h1>
+<ul class="list-group">
+  <% @routes.each do |route| %>
+    <li class="list-group-item">
+      <div>
+        <p>
+        <strong>Origin:</strong> <%= route.from.name %>
+        <br/>
+        <strong>Destination</strong>: <%= route.to.name %>
+        <br/>
+        <strong>Priority</strong>: <%= route.priority %>
+        </p>
+      </div>
 
-  <div class="jumbotron">
-    <h1>Existing Routes</h1>
-      <table>
-        <thead>
-          <tr>
-            <th colspan="3"></th>
-          </tr>
-        </thead>
+      <div class="btn-group">
+        <%= link_to 'Show' , route, :class => "btn btn-primary" %>
+        <%= link_to 'Edit', edit_route_path(route), :class => "btn btn-warning" %>
+        <%= link_to 'Destroy', route, method: :delete, data: { confirm: 'Are you sure?' },  :class => "btn btn-danger" %>
+      </div>
+    </li>
+  <% end %>
+</ul>
 
-        <tbody>
-          <% @routes.each do |route| %>
-            <tr>
-              
-              <div class="btn-group-justified">
-                  <%= link_to 'Show' , route, :class => "btn btn-primary" %>
-                  <%= link_to 'Edit', edit_route_path(route), :class => "btn btn-primary" %>
-                  <%= link_to 'Destroy', route, method: :delete, data: { confirm: 'Are you sure?' },  :class => "btn btn-warning" %>
-              </div>
-              <br>
-            </tr>
-          <% end %>
-        </tbody>
-      </table>
-  <div>
 <br>
 
 <%= link_to 'New Route', new_route_path %>
