@@ -1,4 +1,114 @@
 <p id="notice"><%= notice %></p>
 
+<h1>Route Details</h1>
+<table class="table table-striped table-hover">
+  <thead>
+      <th>
+        Property
+      </th>
+      <th>
+        Value
+      </th>
+  </thead>
+  <tbody>
+    <tr>
+      <th>
+        From
+      </th>
+      <td>
+      <%= @route.from.name %>
+      </td>
+    </tr>
+    <tr>
+      <th>
+        To
+      </th>
+      <td>
+      <%= @route.to.name %>
+      </td>
+    </tr>
+    <tr>
+      <th>
+       Priority
+      </th>
+      <td>
+      <%= @route.priority %>
+      </td>
+    </tr>
+    <tr>
+      <th>
+       Provider
+      </th>
+      <td>
+      <%= @route.provider %>
+      </td>
+    </tr>
+    <tr>
+      <th>
+       Cost (Weight)
+      </th>
+      <td>
+      <%= @route.weight_cost %>
+      </td>
+    </tr>
+    <tr>
+      <th>
+       Price (Weight)
+      </th>
+      <td>
+      <%= @route.weight_price %>
+      </td>
+    </tr>
+    <tr>
+      <th>
+       Cost (Volume)
+      </th>
+      <td>
+      <%= @route.volume_cost %>
+      </td>
+    </tr>
+    <tr>
+      <th>
+       Price (Volume)
+      </th>
+      <td>
+      <%= @route.volume_price %>
+      </td>
+    </tr>
+    <tr>
+      <th>
+       Maximum Weight
+      </th>
+      <td>
+      <%= @route.max_weight %> Kg
+      </td>
+    </tr>
+    <tr>
+      <th>
+       Maximum Volume
+      </th>
+      <td>
+        <%= @route.max_volume %> cm<sup>3</sup>
+      </td>
+    </tr>
+    <tr>
+      <th>
+       Duration
+      </th>
+      <td>
+      <%= @route.duration %> hours
+      </td>
+    </tr>
+    <tr>
+      <th>
+       Day
+      </th>
+      <td>
+      <%= @route.day %>
+      </td>
+    </tr>
+  </tbody>
+</table>
+
 <%= link_to 'Edit', edit_route_path(@route) %> |
 <%= link_to 'Back', routes_path %>

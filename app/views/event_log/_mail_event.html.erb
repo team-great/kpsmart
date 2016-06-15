@@ -1,16 +1,11 @@
-<div class="row">
-  <div class="col-sm-3">
-    <span>
-      <strong>From:</strong> <%= event.from %>
-    </span>
-  </div>
-  <div class="col-sm-3">
-    <span>
-      <strong>To:</strong> <%= event.to %>
-    </span>
-  </div>
-  <div class="col-sm-1">
+<div>
+  <%= link_to "Show", mail_delivery_path(event.object.id), class: "btn btn-default" %>
+  <button class="btn btn-default" type="button" data-toggle="collapse" href="#mail_<%= event.id %>"
+    data-target="#mail_<%= event.id %>">
+    Details
+  </button>
+
+  <div class="collapse" id="mail_<%= event.id %>">
+    <%= render 'mail_deliveries/properties', mail: event.object %>
   </div>
 </div>
-<%= link_to "Show", mail_delivery_path(event.id) %>
-<br/>
