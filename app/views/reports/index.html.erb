@@ -1,2 +1,26 @@
 
-<%= link_to "Revenue", revenue_url %>
+<div class="row">
+  <div class="col-md-4">
+    <div class="jumbotron text-center">
+      <h2>Last Month's Revenue</h2>
+      <h3>$<%= @total_revenue %></h3>
+    </div>
+  </div>
+
+  <div class="col-md-4">
+    <div class="jumbotron text-center">
+      <h2>Last Month's Expenditure</h2>
+      <h3>$<%= @total_cost %></h3>
+    </div>
+  </div>
+
+  <div class="col-md-4">
+    <div class="jumbotron text-center">
+      <h2>Last Month's Event count</h2>
+      <h3><%= @event_count %></h3>
+    </div>
+  </div>
+</div>
+
+<%= link_to "Revenue Rpeort", revenue_url, class: 'btn btn-default' %>
+<%= link_to "Critical Rpeort", revenue_url, class: 'btn btn-default' %>
