@@ -94,7 +94,7 @@ end
 mail_delivery = [
   # day, to, from, weight, volume, priority
   [ "Monday", "Prague", "Wellington", 100, 5, "Air"],
-  [ "Tuesday", "Istabul", "Dunedin", 100, 5, "Air"],
+  [ "Tuesday", "Istanbul", "Dunedin", 100, 5, "Air"],
   [ "Wednesday", "London", "Wellington", 100, 5, "Air"],
   [ "Friday", "Buenos Aires", "Hamilton", 100, 5, "Air"],
   [ "Monday", "Berlin", "Dunedin", 100, 5, "Air"],
