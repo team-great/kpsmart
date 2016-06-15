@@ -12,7 +12,7 @@ FactoryGirl.define do
     max_weight 1000
     max_volume 1000
     duration 10
-    frequency 1
+    frequency 5
     day "Monday"
   end
 
