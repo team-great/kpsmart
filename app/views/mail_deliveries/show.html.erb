@@ -1,4 +1,44 @@
 <p id="notice"><%= notice %></p>
 
+<h2>Details</h2>
+<hr/>
+
+<h3>Parcel</h3>
+<%= render 'properties', mail: @mail_delivery %>
+<h3>Mail Route</h3>
+
+<table class="table table-striped table-hover">
+  <thead>
+    <tr>
+      <th>Origin</th>
+      <th>Destination</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @mail_delivery.routes.each do |route| %>
+      <tr>
+        <td>
+          <% if route.from == @mail_delivery.from %>
+            <strong>
+              <%= route.from.name %>
+            </strong>
+            <% else %>
+              <%= route.from.name %>
+            <% end %>
+        </td>
+        <td>
+          <% if route.to == @mail_delivery.to %>
+            <strong>
+              <%= route.to.name %>
+            </strong>
+            <% else %>
+              <%= route.to.name %>
+            <% end %>
+        </td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
 <%= link_to 'Edit', edit_mail_delivery_path(@mail_delivery) %> |
 <%= link_to 'Back', mail_deliveries_path %>
