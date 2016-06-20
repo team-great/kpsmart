@@ -69,4 +69,19 @@ class MailDeliveryTest < ActiveSupport::TestCase
     assert_not_empty @delivery.errors[:weight]
   end
 
+  test "duration is correct at 6pm Monday" do
+    @delivery.created_at = Time.new(2016,6,13,18,0,0,0)
+    assert_equal 10, @delivery.duration
+  end
+
+  test "duration is correct at 7pm Monday" do
+    @delivery.created_at = Time.new(2016,6,13,19,0,0,0)
+    assert_equal 14, @delivery.duration
+  end
+
+  test "duration is correct at 7:30pm Monday" do
+    @delivery.created_at = Time.new(2016,6,13,19,30,0,0)
+    assert_equal 13.5, @delivery.duration
+  end
+
 end

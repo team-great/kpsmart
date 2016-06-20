@@ -7,7 +7,6 @@ module Timecalc
 	def next_del_time(freq, mail_creation_time)	
 		# mail_creation_time = Time.new(2016,6,15,15,0,0,0)	
 		freq = freq * 3600
-		puts mail_creation_time
 
 		if mail_creation_time.monday? && mail_creation_time.hour<=18   # if today monday before 6pm return mon 6pm
 			next_del_time = Time.new(mail_creation_time.year,mail_creation_time.month,mail_creation_time.day, 18,0,0, "+00:00")
@@ -25,7 +24,7 @@ module Timecalc
 				prop_del_time = prop_del_time + freq
 			end
 			next_del_time = prop_del_time
-			wait_til_del = (mail_creation_time - next_del_time) / 3600
+			wait_til_del = (next_del_time - mail_creation_time) / 3600
 			return next_del_time, wait_til_del
 		end
 	end	

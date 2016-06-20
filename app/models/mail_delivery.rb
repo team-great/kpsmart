@@ -1,7 +1,9 @@
 require 'routing/graph'
+require 'timecalc/timecalc'
 
 class MailDelivery < ActiveRecord::Base
   include RoutesHelper
+  include Timecalc
   belongs_to :to, class_name: 'City'
   belongs_to :from, class_name: 'City'
   has_and_belongs_to_many :routes
@@ -41,6 +43,20 @@ class MailDelivery < ActiveRecord::Base
     self.routes.inject(0) do |sum, r|
       sum += (self.weight * r.weight_price) + (self.volume * r.volume_price)
     end
+  end
+
+  def duration
+    time = created_at.utc
+    total = 0
+
+    routes.each do |route|
+      next_del, wait = next_del_time route.frequency, time
+
+      total += wait + route.duration
+      time = next_del + wait.hours
+    end
+
+    total.to_f
   end
 
   private
@@ -95,6 +111,7 @@ class MailDelivery < ActiveRecord::Base
     self.day = Time.now.strftime('%A').downcase
 
   end
+
 
   def create_path
 
