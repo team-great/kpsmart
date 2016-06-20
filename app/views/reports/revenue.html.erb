@@ -9,7 +9,13 @@
     <th>Mail Delivery</th>
   </thead>
   <% @mail.each do |mail| %>
-    <tr class="">
+    <% if (mail.profit / mail.cost) > 0.1 %>
+      <tr class="success">
+      <% elsif mail.profit < 0 %>
+      <tr class="danger">
+      <% else %>
+      <tr class="">
+      <% end %>
 
       <td><%= mail.from %></td>
       <td><%= mail.to %></td>
@@ -19,6 +25,6 @@
       <td>
         <%= link_to "Show",  mail_delivery_url(mail.id) %>
       </td>
-    </tr>
-  <% end %>
+      </tr>
+    <% end %>
 </table>
