@@ -4,11 +4,12 @@ module RoutesHelper
 
   class RouteResult
 
-    attr_reader :valid, :results, :distance
+    attr_reader :routes, :valid, :results, :distance
     def initialize(params)
       @valid = params[:valid]
       @results = params[:results]
       @distance = params[:distance] || 0
+      @routes = params[:routes] || []
     end
 
   end
@@ -33,21 +34,35 @@ module RoutesHelper
     results = graph.dijkstra(start_point, end_point)
 
     if results == nil
+
       return RouteResult.new  valid: false,
         results: [name: "No route found"],
         distance: 0
+
     end
 
     distance = results[:distance] #graph.length_between(start_point, end_point)
 
     names = []
+    routes = []
+
+    last = nil
     results[:path].each do |res|
-      name = City.find_by(id: res)
-      names.push name
+
+      city = City.find_by(id: res)
+      names.push city
+      if last 
+        found = Route.find_by(from: last, to: city)
+        routes.push found
+      end
+
+      last = city
     end
 
     return RouteResult.new valid: true,
       results: names,
-      distance: distance
+      distance: distance,
+      routes: routes
+
   end
 end

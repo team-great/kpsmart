@@ -5,7 +5,7 @@
 #
 #   cities = City.create([{ name: 'Chicago' }, { name: 'Copenhagen' }])
 #   Mayor.create(name: 'Emanuel', city: cities.first)
-
+include RoutesHelper
 @routes = []
 
 initial_transport_routes = [
@@ -71,26 +71,46 @@ initial_transport_routes = [
   [ "Tolstoy Shipping", "Buenos Aires", "Havana", "Sea", 15, 16, 2000, 65, 58, 14],
   [ "Tolstoy Shipping", "Buenos Aires", "Montevideo", "Sea", 15, 16, 2000, 25, 58, 14],
   [ "Tolstoy Shipping", "Buenos Aires", "Port of Spain", "Sea", 15, 16, 2000, 65, 58, 14]
-
-
-
-
 ]
 
-
+seed = Random.new
 initial_transport_routes.each do |route|
   # can move this out if we bother to set lat & long
   to = City.where(name: route[1]).first_or_create.name
   from = City.where(name: route[2]).first_or_create.name
 
+  weight_price = (1 + seed.rand(0.75..1.25) * route[4] * 1.3).round 2
+  weight_cost  = (1 + seed.rand(0.75..1.25) * route[4] * 0.9).round 2
+  volume_price = (1 + seed.rand(0.75..1.25) * route[5] * 1.3).round 2
+  volume_cost  = (1 + seed.rand(0.75..1.25) * route[5] * 0.9).round 2
+
   r = Route.create(provider: route[0],
                to_name: to,
                from_name: from,
                priority_name: route[3],
-               weight_cost: route[4],
-               volume_cost: route[5],
-               weight_price: route[4],
-               volume_price: route[5],
+               weight_cost: weight_cost,
+               volume_cost: volume_cost,
+               weight_price: weight_price,
+               volume_price: volume_price,
+               max_weight: route[6],
+               max_volume: route[7],
+               duration: route[8],
+               frequency: route[9],
+               day: 'Monday')
+
+  unless r.save
+    puts r.errors.messages
+  end
+  @routes << r
+
+  r = Route.create(provider: route[0],
+               to_name: from,
+               from_name: to,
+               priority_name: route[3],
+               weight_cost: weight_cost,
+               volume_cost: volume_cost,
+               weight_price: weight_price,
+               volume_price: volume_price,
                max_weight: route[6],
                max_volume: route[7],
                duration: route[8],
@@ -166,9 +186,7 @@ mail_delivery.each do |mail|
 
   end
 
-  m.routes << @routes[10]
-  m.routes << @routes[11]
-  m.routes << @routes[12]
+  m.routes << get_route(from, to).routes
 
 end
 
