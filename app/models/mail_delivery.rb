@@ -29,7 +29,7 @@ class MailDelivery < ActiveRecord::Base
 
   end
 
-  # busniness facing cost
+  # business facing cost
   def total_cost
     self.routes.inject(0) do |sum, r|
       sum += (self.weight * r.weight_cost) + (self.volume * r.volume_cost)
@@ -99,7 +99,7 @@ class MailDelivery < ActiveRecord::Base
   def create_path
 
     if self.to.nil?
-      errors.add(:to, "must have a distniation")
+      errors.add(:to, "must have a destination")
     end
     if self.from.nil?
       errors.add(:from, "must have a source")

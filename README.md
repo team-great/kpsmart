@@ -10,7 +10,7 @@ A SWEN301 group project to make a mail service built using Ruby on Rails
 
 ## How to run
 
-Perquisites:
+Prerequisites:
 
  * `postgresql` 9.4 or above
  * `ruby` 2.2 or above

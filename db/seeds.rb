@@ -38,17 +38,17 @@ initial_transport_routes = [
   [ "Air New Zealand", "Auckland", "Istanbul", "Air", 15, 16, 2000, 50, 20, 14],
 
   # will connect auckland with a handful of int'l cities by sea
-  [ "Air New Zealand", "Auckland", "Sydney", "Sea", 6, 6, 300, 50, 25, 14],
-  [ "Air New Zealand", "Auckland", "Singapore", "Sea", 9, 8, 300, 50, 26, 14],
-  [ "Air New Zealand", "Auckland", "Tokyo", "Sea", 9, 8, 300, 50, 33, 14],
-  [ "Air New Zealand", "Auckland", "Beijing", "Sea", 11, 15, 250, 50, 39, 14],
-  [ "Air New Zealand", "Auckland", "Bangkok", "Sea", 10, 12, 200, 50, 32, 14],
-  [ "Air New Zealand", "Auckland", "New York", "Sea", 15, 16, 260, 50, 30, 14],
-  [ "Air New Zealand", "Auckland", "Buenos Aires", "Sea", 15, 16, 200, 50, 42, 14],
-  [ "Air New Zealand", "Auckland", "Suva", "Sea", 15, 16, 2000, 50, 24, 14],
-  [ "Air New Zealand", "Auckland", "Jakarta", "Sea", 15, 16, 2000, 50, 28, 14],
-  [ "Air New Zealand", "Auckland", "London", "Sea", 15, 16, 2000, 50, 37, 14],
-
+  [ "NZ Shipping", "Auckland", "Sydney", "Sea", 6, 6, 300, 50, 25, 14],
+  [ "NZ Shipping", "Auckland", "Singapore", "Sea", 9, 8, 300, 50, 26, 14],
+  [ "NZ Shipping", "Auckland", "Tokyo", "Sea", 9, 8, 300, 50, 33, 14],
+  [ "NZ Shipping", "Auckland", "Beijing", "Sea", 11, 15, 250, 50, 39, 14],
+  [ "NZ Shipping", "Auckland", "Bangkok", "Sea", 10, 12, 200, 50, 32, 14],
+  [ "NZ Shipping", "Auckland", "New York", "Sea", 15, 16, 260, 50, 30, 14],
+  [ "NZ Shipping", "Auckland", "Buenos Aires", "Sea", 15, 16, 200, 50, 42, 14],
+  [ "NZ Shipping", "Auckland", "Suva", "Sea", 15, 16, 2000, 50, 24, 14],
+  [ "NZ Shipping", "Auckland", "Jakarta", "Sea", 15, 16, 2000, 50, 28, 14],
+  [ "NZ Shipping", "Auckland", "London", "Sea", 15, 16, 2000, 50, 37, 14],
+  [ "NZ Shipping", "Auckland", "Havana", "Sea", 15, 16, 2000, 50, 37, 14],
 
   # now connecting some of those cities to some more cities
   [ "Virgin International", "New York", "Mexico City", "Air", 15, 16, 2000, 50, 5, 14],
@@ -60,7 +60,21 @@ initial_transport_routes = [
   [ "Virgin International", "Buenos Aires", "Havana", "Air", 15, 16, 2000, 50, 8, 14],
   [ "Virgin International", "Buenos Aires", "Toronto", "Air", 15, 16, 2000, 50, 12, 14],
   [ "Virgin International", "Buenos Aires", "Mexico City", "Air", 15, 16, 2000, 50, 9, 14],
-  [ "Virgin International", "Istanbul", "Prague", "Air", 15, 16, 2000, 50, 5, 14]
+  [ "Virgin International", "Istanbul", "Prague", "Air", 15, 16, 2000, 50, 5, 14],
+
+  # now connecting some of those cities to some more cities by sea
+  [ "Tolstoy Shipping", "New York", "Mexico City", "Sea", 15, 16, 2000, 50, 50, 14],
+  [ "Tolstoy Shipping", "New York", "Toronto", "Sea", 15, 16, 2000, 50, 45, 14],
+  [ "Tolstoy Shipping", "New York", "Havana", "Sea", 15, 16, 2000, 50, 35, 14],
+  [ "Tolstoy Shipping", "London", "Toronto", "Sea", 15, 16, 2000, 50, 35, 14],
+  [ "Tolstoy Shipping", "London", "Havana", "Sea", 15, 16, 2000, 50, 55, 14],
+  [ "Tolstoy Shipping", "Buenos Aires", "Havana", "Sea", 15, 16, 2000, 65, 58, 14],
+  [ "Tolstoy Shipping", "Buenos Aires", "Montevideo", "Sea", 15, 16, 2000, 25, 58, 14],
+  [ "Tolstoy Shipping", "Buenos Aires", "Port of Spain", "Sea", 15, 16, 2000, 65, 58, 14]
+
+
+
+
 ]
 
 
@@ -93,17 +107,45 @@ end
 
 mail_delivery = [
   # day, to, from, weight, volume, priority
-  [ "Monday", "Prague", "Wellington", 100, 5, "Air"],
-  [ "Tuesday", "Istanbul", "Dunedin", 100, 5, "Air"],
-  [ "Wednesday", "London", "Wellington", 100, 5, "Air"],
-  [ "Friday", "Buenos Aires", "Hamilton", 100, 5, "Air"],
-  [ "Monday", "Berlin", "Dunedin", 100, 5, "Air"],
-  [ "Monday", "Bangkok", "Wellington", 100, 5, "Air"],
-  [ "Friday", "Beijing", "Hamilton", 100, 5, "Air"],
-  [ "Tuesday", "Buenos Aires", "Dunedin", 100, 5, "Air"],
-  [ "Monday", "Mexico City", "Wellington", 100, 5, "Air"],
-  [ "Wednesday", "Sydney", "Hamilton", 100, 5, "Air"],
-  [ "Tuesday", "Singapore", "Dunedin", 100, 5, "Air"]
+  [ "Monday", "Prague", "Wellington", 90, 5, "Air"],
+  [ "Tuesday", "Istanbul", "Dunedin", 80, 6, "Air"],
+  [ "Wednesday", "London", "Wellington", 90, 7, "Air"],
+  [ "Friday", "Buenos Aires", "Hamilton", 70, 8, "Air"],
+  [ "Monday", "Berlin", "Dunedin", 50, 9, "Air"],
+  [ "Monday", "Bangkok", "Wellington", 130, 10, "Air"],
+  [ "Friday", "Beijing", "Hamilton", 102, 11, "Air"],
+  [ "Tuesday", "Buenos Aires", "Dunedin", 120, 3, "Air"],
+  [ "Monday", "Mexico City", "Wellington", 100, 4, "Air"],
+  [ "Wednesday", "Sydney", "Hamilton", 10, 5, "Air"],
+  [ "Tuesday", "Singapore", "Dunedin", 50, 6, "Air"],
+  [ "Monday", "Havana", "Wellington", 90, 5, "Air"],
+  [ "Monday", "Suva", "Wellington", 80, 5, "Air"],
+  [ "Tuesday", "Havana", "Hamilton", 70, 5, "Air"],
+  [ "Monday", "Havana", "Wellington", 60, 3, "Air"],
+  [ "Monday", "Havana", "Auckland", 50, 4, "Air"],
+  [ "Tuesday", "Istanbul", "Dunedin", 30, 6, "Air"],
+  [ "Wednesday", "London", "Wellington", 90, 7, "Air"],
+  [ "Friday", "Suva", "Hamilton", 70, 8, "Air"],
+  [ "Friday", "Suva", "Hamilton", 70, 8, "Air"],
+  [ "Monday", "Jakarta", "Dunedin", 50, 9, "Air"],
+  [ "Monday", "Bangkok", "Wellington", 130, 10, "Air"],
+  [ "Friday", "Beijing", "Hamilton", 102, 11, "Air"],
+  [ "Tuesday", "Jakarta", "Dunedin", 120, 3, "Air"],
+  [ "Monday", "Mexico City", "Wellington", 100, 4, "Air"],
+  [ "Wednesday", "Jakarta", "Hamilton", 10, 5, "Air"],
+  [ "Monday", "Havana", "Wellington", 60, 3, "Sea"],
+  [ "Monday", "Havana", "Auckland", 50, 4, "Sea"],
+  [ "Tuesday", "Istanbul", "Dunedin", 30, 6, "Sea"],
+  [ "Wednesday", "London", "Wellington", 90, 7, "Sea"],
+  [ "Friday", "Suva", "Hamilton", 70, 8, "Sea"],
+  [ "Friday", "Suva", "Hamilton", 70, 8, "Sea"],
+  [ "Monday", "Jakarta", "Dunedin", 50, 9, "Sea"],
+  [ "Monday", "Bangkok", "Wellington", 130, 10, "Sea"],
+  [ "Friday", "Beijing", "Hamilton", 102, 11, "Sea"],
+  [ "Tuesday", "Jakarta", "Dunedin", 120, 3, "Sea"],
+  [ "Monday", "Mexico City", "Wellington", 100, 4, "Sea"],
+  [ "Wednesday", "Jakarta", "Hamilton", 10, 5, "Sea"],
+  [ "Wednesday", "Montevideo", "Hamilton", 10, 5, "Sea"]
 ]
 
 mail_delivery.each do |mail|
@@ -138,7 +180,6 @@ User.create!(email: "manager@kps.com", password: "12345")
 =begin
 transport_cost_update = [
   #same fields as route creation
-  # the xml on the assignment also has a "day" field, but that's silly.
   # the first three change the weightcost
   [ "Air New Zealand", "Auckland", "Sydney", "Air", 7, 6, 300, 50, 5, 14],
   [ "Air New Zealand", "Auckland", "Singapore", "Air", 10, 8, 300, 50, 6, 14],
