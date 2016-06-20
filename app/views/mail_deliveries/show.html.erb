@@ -15,7 +15,7 @@
     </tr>
   </thead>
   <tbody>
-    <% @mail_delivery.routes.each do |route| %>
+    <% @mail_delivery.routes_ordered.each do |route| %>
       <tr>
         <td>
           <% if route.from == @mail_delivery.from %>

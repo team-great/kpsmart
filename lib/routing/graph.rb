@@ -27,7 +27,7 @@ class Graph < Array
 
   def connect_mutually(vertex1, vertex2, length = 1)
     self.connect vertex1, vertex2, length
-    self.connect vertex2, vertex1, length
+    # self.connect vertex2, vertex1, length
   end
 
   def neighbors(vertex)
@@ -48,12 +48,15 @@ class Graph < Array
   def dijkstra(src, dst = nil)
     distances = {}
     previouses = {}
+
     self.each do |vertex|
       distances[vertex] = nil # Infinity
       previouses[vertex] = nil
     end
+
     distances[src] = 0
     vertices = self.clone
+
     until vertices.empty?
       nearest_vertex = vertices.inject do |a, b|
         next b unless distances[a]
@@ -61,22 +64,30 @@ class Graph < Array
         next a if distances[a] < distances[b]
         b
       end
+
       break unless distances[nearest_vertex] # Infinity
+
       if dst and nearest_vertex == dst
         path = get_path(previouses, src, dst)
         return { path: path, distance: distances[dst] }
       end
+
       neighbors = vertices.neighbors(nearest_vertex)
+
       neighbors.each do |vertex|
+
         alt = distances[nearest_vertex] + vertices.length_between(nearest_vertex, vertex)
+
         if distances[vertex].nil? or alt < distances[vertex]
           distances[vertex] = alt
           previouses[vertex] = nearest_vertex
           # decrease-key v in Q # ???
         end
       end
+
       vertices.delete nearest_vertex
     end
+
     if dst
       return nil
     else
