@@ -31,6 +31,27 @@ class MailDelivery < ActiveRecord::Base
 
   end
 
+  def routes_ordered
+    sorted = []
+    todo = routes.to_ary
+    last = from
+
+    while !todo.empty?
+      index = todo.index do |t|
+        t.from.id == last.id
+      end
+      if index.nil?
+        byebug
+      else
+        route = todo.delete_at(index)
+        sorted << route
+        last = route.to
+      end
+    end
+
+    sorted
+  end
+
   # business facing cost
   def total_cost
     self.routes.inject(0) do |sum, r|

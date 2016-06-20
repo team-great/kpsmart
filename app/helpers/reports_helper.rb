@@ -12,7 +12,7 @@ module ReportsHelper
     end
 
     def profit
-      price - cost
+      (price - cost).round 2
     end
   end
 
