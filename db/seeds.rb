@@ -186,8 +186,6 @@ mail_delivery.each do |mail|
 
   end
 
-  m.routes << get_route(from, to).routes
-
 end
 
 

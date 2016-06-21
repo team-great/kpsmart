@@ -13,8 +13,6 @@ class MailDelivery < ActiveRecord::Base
   validates :volume, :numericality => { :greater_than => 0, :message => 'Volume must be larger than 0.' }
   validates :weight, :numericality => { :greater_than => 0, :message => 'Weight must be larger than 0.' }
 
-
-
   # prevents updating the package if it has been processed
   before_validation do
 
@@ -31,6 +29,12 @@ class MailDelivery < ActiveRecord::Base
 
   end
 
+  before_create do
+    if self.routes.empty?
+      self.routes = get_route(self.from.name, self.to.name).routes
+    end
+  end
+
   def routes_ordered
     sorted = []
     todo = routes.to_ary
@@ -40,13 +44,9 @@ class MailDelivery < ActiveRecord::Base
       index = todo.index do |t|
         t.from.id == last.id
       end
-      if index.nil?
-        byebug
-      else
-        route = todo.delete_at(index)
-        sorted << route
-        last = route.to
-      end
+      route = todo.delete_at(index)
+      sorted << route
+      last = route.to
     end
 
     sorted
