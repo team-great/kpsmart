@@ -79,10 +79,10 @@ initial_transport_routes.each do |route|
   to = City.where(name: route[1]).first_or_create.name
   from = City.where(name: route[2]).first_or_create.name
 
-  weight_price = (1 + seed.rand(0.75..1.25) * route[4] * 1.3).round 2
-  weight_cost  = (1 + seed.rand(0.75..1.25) * route[4] * 0.9).round 2
-  volume_price = (1 + seed.rand(0.75..1.25) * route[5] * 1.3).round 2
-  volume_cost  = (1 + seed.rand(0.75..1.25) * route[5] * 0.9).round 2
+  weight_price = (1 + seed.rand(0.75..1.50) * route[4]).round 2
+  weight_cost  = (1 + seed.rand(0.75..1.25) * route[4]).round 2
+  volume_price = (1 + seed.rand(0.75..1.50) * route[5]).round 2
+  volume_cost  = (1 + seed.rand(0.75..1.25) * route[5]).round 2
 
   r = Route.create(provider: route[0],
                to_name: to,
